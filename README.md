@@ -1,5 +1,7 @@
 # Rec Ninja
 
+[Live Link](https://ivthefourth.github.io/rec-ninja/)
+
 [![Stories in Ready](https://badge.waffle.io/ivthefourth/project-1.svg?label=ready&title=Ready)](https://waffle.io/ivthefourth/project-1)
 
 
