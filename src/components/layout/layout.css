@@ -1,29 +1,12 @@
-
-
-.layout-menu-fab{
-   top: 4px;
-   right: 4px;
+.layout-logo{
+   left: 0.5rem;
 }
 
-.layout-menu-fab ul.layout-menu-options{
-   height: auto;
-   bottom: auto;
-   top: 20px;
+.layout-menu-options--footer{
+   display: inline-block;
 }
 
-@media screen and (max-width: 600px){
-
-
-   .layout-menu-fab .btn-floating.btn-large{
-      height: 48px;
-      width: 48px;
-   }
-   .layout-menu-fab .btn-floating.btn-large i{
-      line-height: 48px;
-   }
-
-   .layout-menu-fab ul.layout-menu-options{
-      top: 16px;
-      right: 56px;
-   }
+.layout-footer-menu{
+   position: fixed;
+   bottom: 0;
 }
