@@ -1,91 +1,29 @@
-.test-class{
-   background: lime;
+
+
+.layout-menu-fab{
+   top: 4px;
+   right: 4px;
 }
 
-.layout{
-   background: rebeccapurple;
+.layout-menu-fab ul.layout-menu-options{
+   height: auto;
+   bottom: auto;
+   top: 20px;
 }
 
-.card {
-	cursor: pointer;
-}
-.chip {
-	background: #e8e8e8;
-	cursor: pointer;
-	display: block;
-	max-height: 2em;
-	line-height: 2em;
-	padding: 0px;
-	margin-right: 0px;
-}
-.selected{
-	background: rgba(111, 179, 132, 0.4);
-}
+@media screen and (max-width: 600px){
 
-#map {
-	top: 7px;
-}
 
-.nav-wrapper, .btn, .btn-floating {
-	background: #6fb384;
-	color: white;
-}
+   .layout-menu-fab .btn-floating.btn-large{
+      height: 48px;
+      width: 48px;
+   }
+   .layout-menu-fab .btn-floating.btn-large i{
+      line-height: 48px;
+   }
 
-.collapsible-body {
-	padding: 15px;
-	max-height: 80vh;
-	overflow: auto;
-}
-
-.collapsible-header {
-	background: #5F8A97;
-	color: white;
-}
-
-.center {
-	text-align: center;
-}
-
-.btn:hover {
-	background: #45955D;
-}
-
-.modal-content {
-	background: #dfeadf;
-}
-
-.tabs .tab a {
-	color: #6fb384;
-}
-
-.tabs .tab a.active {
-	color: #6fb384;
-}
-
- .tabs .indicator {
- 	background: #6fb384;
- }
-
- .padding {
- 	padding-top: 10px;
- }
-.fixed {
-	position: absolute;
-	top: 10px;
-	right: 10px;
-	color: gray;
-}
-
-#font-size-12 {
-	font-size: 12px;
-	margin-bottom: 0px;
-}
-
-.range-field {
-	margin-top: 0px;
-	padding: 0 15px;
-}
-
-.tabs {
-	overflow-x: hidden;
+   .layout-menu-fab ul.layout-menu-options{
+      top: 16px;
+      right: 56px;
+   }
 }
