@@ -11,7 +11,8 @@ tooltip.tooltip({delay: 50});
 $(function() {
   $( ".sortable" ).sortable({
     revert: true, 
-    handle: '.moveInputDiv',
+    handle: '.route-move-icon',
+    containment: '#route-container',
     stop: function() {
       var children = inputSection.children();
       var checker = 0;
@@ -78,7 +79,7 @@ state.route.on("change", function (e){
 			let newInput;
 			var inputContainer = $("<div>");
 			// Adds ui-state-default class to allow input boxes to be sortable via jquery.ui.
-			inputContainer.attr("class", "row inputContainer ui-state-default");
+			inputContainer.attr("class", "route-input-container ui-state-default");
 			// Stores data number in the inputContainer for manipulation in the sortable function.
 			inputContainer.attr("data-number", i);
 			// Creates a clean view of Google Address from the Places name and address stored in the state object.
@@ -90,18 +91,16 @@ state.route.on("change", function (e){
 				newInput = $("<input>").val(location.data.RecAreaName);
 			}
 			// Adds and appends all classes, buttons, and functions inside the inputContainer.
-			newInput.attr("class", "col s10 m10 l10 route-choice");
-			let closeInput = "<i class='material-icons close-icon'>close</i>";
-			let moveInput = "<i class='material-icons move-icon'>dehaze</i>";
-			let closeInputDiv = $("<div class='col s1 m1 l1 closeInputDiv'>");
-			let moveInputDiv = $("<div class='col s1 m1 l1 moveInputDiv'>");
-			moveInputDiv.append(moveInput);
-			inputContainer.append(moveInputDiv);
-			inputContainer.append(newInput);
-			closeInputDiv.append(closeInput);
-			inputContainer.append(closeInputDiv);
+			newInput.attr("class", "route-choice");
+			let closeInput = $('<a href="#" class="grey-text">').append($("<i class='material-icons route-close-icon'>").text('close'));
+			let moveInput = $('<a href="#" class="grey-text">').append($("<i class='material-icons route-move-icon'>").text('drag_handle'));
+			inputContainer.append(moveInput, newInput, closeInput);			
+			moveInput.click(function(e){
+				e.preventDefault();
+			});
 			// Function to remove the inputContainer if the close (X) button is pressed.			
-			closeInputDiv.click(function(){
+			closeInput.click(function(e){
+				e.preventDefault();
 				if (location.type === "recarea"){
 			 		state.route.path[i].data.setInRoute(false);
 				}
@@ -138,8 +137,12 @@ state.route.on("change", function (e){
 		} 
 		// Creates and appends buttons to the buttonSection when a completed input is filled in.
 		buttonSection.append("<div id='newbuttons'>");
-		$("#newbuttons").append("<a class='btn-floating btn-small waves-effect waves-light' id='route-addBtn'><i class='material-icons'>add</i></a>");
-		$("#newbuttons").append("<p id='route-newLocationText'>Add a New Stop</p>");
+		$("#newbuttons")
+		.append(
+			$("<a class='btn waves-effect waves-light' id='route-addBtn'>")
+			.text('Add Location')
+			.prepend('<i class="material-icons left">add</i>')
+		);
 		$("#route-addBtn").click(newInputField);
 	}
 });
@@ -152,6 +155,7 @@ function autofill(input, container, add, index){
 	// Google Places function - uses "autocomplete" placeholder defined in line above.
 	autocomplete.addListener('place_changed', function (){
 		var place = autocomplete.getPlace();
+		console.log(place);
 		if (place.place_id){
 			if (add){
 				tooltip.mouseleave();

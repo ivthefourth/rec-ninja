@@ -1,0 +1,33 @@
+.route-input-container{
+   background-color: #fff;
+   position: relative;
+   margin-bottom: 20px;
+}
+
+.route-input-container i{
+   background-color: #fff;
+   width: 3rem;
+   vertical-align: middle;
+   text-align: center;
+   height: 2.8rem;
+   height: calc(3rem - 1px);
+   line-height: 3rem;
+   position: absolute;
+   top: 0;
+}
+.route-move-icon{
+   left: 0;
+}
+.route-close-icon{
+   right: 0;
+}
+
+.route-input-container input{
+   box-sizing: border-box;
+   padding-left: 3rem;
+   margin-bottom: 0;
+}
+
+.route-btn-container{
+   text-align: center;
+}
