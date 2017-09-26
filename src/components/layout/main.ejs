@@ -19,86 +19,93 @@
    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAEGAr0lLE7n6g1bEOC2smP7Q-F9ln8b-0&libraries=places"></script>
 </head>
 <body>
-   <nav class="blue-grey darken-4">
+   <nav class="blue-grey darken-4 layout-header-menu">
       <div class="nav-wrapper">
-         <a href="#" class="brand-logo left hide-on-small-only layout-logo">Rec Ninja</a>
-         <a href="#" class="brand-logo center hide-on-med-and-up">Rec Ninja</a>
+         <a href="#" class="brand-logo left layout-logo">Rec Ninja</a>
          <ul class="layout-menu-options right hide-on-small-only">
-            <li><a class="btn-floating red" title="interests"><i class="material-icons">landscape</i></a></li>
-            <li><a class="btn-floating orange darken-1" title="route"><i class="material-icons">directions_car</i></a></li>
-            <li class="hide-on-med-and-up"><a class="btn-floating green" title="map"><i class="material-icons">map</i></a></li>
-            <li class="hide-on-small-only"><a class="btn-floating green darken-1" title="directions"><i class="material-icons modal-trigger" href="#directions-modal">directions</i></a></li>
+            <li><a class="btn-floating pink" title="interests"><i class="material-icons">landscape</i></a></li>
+            <li><a class="btn-floating deep-orange" title="route"><i class="material-icons">directions_car</i></a></li>
+            <li><a class="btn-floating amber modal-trigger" title="directions" href="#directions-modal"><i class="material-icons" >directions</i></a></li>
+            <li><a class="btn-floating green"  title="find recreation" href="#"><i class="material-icons" >search</i></a></li>
             <li><a class="btn-floating blue" title="suggestions"><i class="material-icons">list</i></a></li>
-            <li class="hide-on-small-only"><a class="btn-floating purple modal-trigger" href="#tutorial-modal" title="about"><i class="material-icons">help_outline</i></a></li>
+            <li><a class="btn-floating purple modal-trigger" href="#tutorial-modal" title="about"><i class="material-icons">help_outline</i></a></li>
+         </ul>
+         <ul class="right hide-on-med-and-up">
+            <li><a class="modal-trigger" title="directions" href="#directions-modal"><i class="material-icons">directions</i></a></li>
+            <li><a title="find recreation"><i class="material-icons blue-grey-text text-darken-2">search</i></a></li>
+            <li><a href="#tutorial-modal" class="modal-trigger"><i class="material-icons" title="about">help_outline</i></a></li>
          </ul>
       </div>
    </nav>
    <nav class="blue-grey darken-4 center layout-footer-menu hide-on-med-and-up">
       <div class="nav-wrapper">
          <ul class="layout-menu-options--footer center">
-            <li><a class="btn-floating red" title="interests"><i class="material-icons">landscape</i></a></li>
-            <li><a class="btn-floating orange darken-1" title="route"><i class="material-icons">directions_car</i></a></li>
-            <li class="hide-on-med-and-up"><a class="btn-floating green" title="map"><i class="material-icons">map</i></a></li>
-            <li class="hide-on-small-only"><a class="btn-floating green darken-1" title="directions"><i class="material-icons modal-trigger" href="#directions-modal">directions</i></a></li>
-            <li><a class="btn-floating blue" title="suggestions"><i class="material-icons">list</i></a></li>
-            <li class="hide-on-small-only"><a class="btn-floating purple modal-trigger" href="#tutorial-modal" title="about"><i class="material-icons">help_outline</i></a></li>
+            <li><a id="mobile-show-interests" class="btn-floating red" title="interests"><i class="material-icons">landscape</i></a></li>
+            <li><a id="mobile-show-route" class="btn-floating orange" title="route"><i class="material-icons">directions_car</i></a></li>
+            <li class="hide-on-med-and-up"><a  id="mobile-show-map" class="btn-floating green" title="map"><i class="material-icons">place</i></a></li>
+            <li><a  id="mobile-show-suggestions" class="btn-floating blue" title="suggestions"><i class="material-icons">list</i></a></li>
          </ul>
       </div>
    </nav>
 
 
 
-   <div class="row">
-      <div class="col s3 m3 l3">
-         <ul class="collapsible" data-collapsible="expandable">
-            <li>
-               <div class="collapsible-header active" id="interests-header">Interests</div>
-               <div class="collapsible-body" id="interests">
-                  <div id="selected-interests">Selected <span><a id ="clear-interests">(Clear)</a></span></div>
-                  <div class="divider"></div>
-                  <div>Available</div>
-                  <div id="unselected-interests"></div>
-               </div>
-            </li>
-            <li>
-               <div class="collapsible-header active">Destinations</div>
-               <div class="collapsible-body" >
-                  <p class="center" id="font-size-12">Search Radius (miles)</p>
-                  <form action="#">
-                     <p class="range-field">
-                        <input type="range" id="radius-slider" min="10" max="50" step="5" value="50"/>
-                     </p>
-                  </form>
-                  <div id="destinations"></div>
-               </div>
-            </li>
-         </ul>
+   <div class="layout-container row layout-shown" id="interests-container">
+      <div class="layout-container-header">
+         <h2><i class="material-icons">landscape</i> Interests</h2>
       </div>
+      <div class="layout-scroll-top"></div>
+      <div class="layout-scroll-bottom"></div>
+      <div class="col s12 layout-container-body">
+         <div id="interests">
+            <h3>Search Radius (miles)</h3>
+            <form action="#">
+               <p class="range-field">
+                  <input type="range" id="radius-slider" min="10" max="50" step="5" value="50"/>
+               </p>
+            </form>
+            <h3>Selected <a id ="clear-interests">(Clear)</a></h3>
+            <div id="selected-interests" class="interests-chips-container">
+               <p class="center" id="interests-none-selected">No Interests Selected</p>
+            </div>
+            <hr>
+            <h3>Available</h3>
+            <div id="unselected-interests" class="interests-chips-container"></div>
+         </div>
+      </div>
+   </div>
+   <div class="layout-container row" id="route-container">
+      <div class="layout-container-header">
+         <h2><i class="material-icons">directions_car</i> Route</h2>
+      </div>
+      <div class="layout-scroll-top"></div>
+      <div class="layout-scroll-bottom"></div>
+      <div class="col s12 layout-container-body">
+         <div id="destinations"></div>
+      </div>
+   </div>
 
-      <div class="col s6 m6 l6">
-         <div id="map"></div>
+   <div id="map"></div>
+   <div class="layout-container" id="suggestions-container">
+      <div class="layout-container-header">
+         <h2><i class="material-icons">list</i> Suggestions</h2>
       </div>
-      <div class="col s3 m3 l3">
-         <ul class="collapsible" data-collapsible="expandable">
-            <li>
-               <div class="collapsible-header active">Suggestions</div>
-               <div class="collapsible-body" id="suggestions">
-                  <ul class="tabs">
-                     <li class="tab col s4"><a class="active" href="#filtered-container">All</a></li>
-                     <li class="tab col s8"><a href="#bookmarked">Bookmarked</a></li>
-                  </ul>
-                  <div class="row">
-                     <div class="col s12">
-                        <div id="filtered-container">
-                           <div id="button-container"></div>
-                           <div id="filtered"></div>
-                        </div>
-                        <div id="bookmarked"></div>
-                     </div>
-                  </div>
-               </div>
-            </li>
+      <div class="layout-scroll-top"></div>
+      <div class="layout-scroll-bottom"></div>
+      <div class="col s12" id="suggestions">
+         <ul class="tabs row">
+            <li class="tab col s6"><a class="active" href="#filtered-container">All</a></li>
+            <li class="tab col s6"><a href="#bookmarked">Bookmarked</a></li>
          </ul>
+         <div class="row layout-suggestion-list">
+            <div class="col s12">
+               <div id="filtered-container">
+                  <div id="button-container"></div>
+                  <div id="filtered"></div>
+               </div>
+               <div id="bookmarked"></div>
+            </div>
+         </div>
       </div>
    </div>
 

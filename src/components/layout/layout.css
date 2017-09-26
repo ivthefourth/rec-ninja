@@ -1,12 +1,90 @@
-.layout-logo{
-   left: 0.5rem;
+
+@media screen and (min-width: 993px){
+   .layout-logo{
+      left: 0.5rem;
+   }
 }
 
 .layout-menu-options--footer{
    display: inline-block;
 }
 
+
+.layout-footer-menu, .layout-header-menu{
+   z-index: 10;
+   position: relative;
+}
+
 .layout-footer-menu{
    position: fixed;
    bottom: 0;
+}
+
+#map, .layout-container{
+   position: absolute;
+   top: 56px;
+   width: 100%;
+   height: calc(100vh - 112px);
+   z-index: 0;
+   background-color: #fff;
+}
+.layout-container{
+   overflow-y: hidden;
+}
+.layout-shown, #map.layout-shown{
+   z-index: 2;
+}
+
+.layout-container-header{
+   display: flex;
+   line-height: 1.5;
+   padding: 1rem;
+   background-color: #fff;
+   border-bottom: 1px solid #ddd;
+   overflow: hidden;
+}
+.layout-container-header h2{
+   font-size: 1.5rem;
+   display: inline-block;
+   margin: 0;
+}
+
+.layout-container-header i{
+   vertical-align: middle;
+}
+
+.layout-container .layout-container-body{
+   height: calc(100vh - 165px);
+   overflow-y: auto;
+   overflow-x: hidden;
+   padding-bottom: 40px;
+   padding-top: 20px;
+}
+
+.layout-suggestion-list{
+   height: calc(100vh - 213px);
+   overflow-y: auto;
+}
+
+.layout-scroll-top{
+   pointer-events: none;
+   z-index: 2;
+   top: 53px;
+   position: absolute;
+   width: calc(100% - 0.75rem);
+   background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%,rgba(255, 255, 255, 0.5) 60%,rgba(255,255,58,0) 100%);
+   height: 20px;
+}
+.layout-scroll-bottom{
+   pointer-events: none;
+   z-index: 2;
+   bottom: 0;
+   position: absolute;
+   width: calc(100% - 0.75rem);
+   background: linear-gradient(to top, rgba(255, 255, 255, 1) 0%,rgba(255, 255, 255, 0.5) 60%,rgba(255,255,58,0) 100%);
+   height: 40px;
+}
+
+#suggestions-container .layout-scroll-top{
+   top: 101px;
 }

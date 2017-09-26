@@ -26,6 +26,15 @@ import state from '../state/state';
    }
 }
 
+state.interests.on('change', (e) => {
+   if (!e.val.selected.length){
+      $('#interests-none-selected').removeClass('hide');
+   }
+   else{
+      $('#interests-none-selected').addClass('hide');
+   }
+})
+
 $(document).ready(function(){
    addChip();
 

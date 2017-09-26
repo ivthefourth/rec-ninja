@@ -1,0 +1,13 @@
+.interests-chips-container .chip{
+   width: calc(50% - 5px);
+   overflow: hidden;
+}
+
+#interests h3{
+   font-size: 1rem;
+}
+
+#interests h3:first-child{
+   margin-top: 0.5rem;
+   margin-bottom: 0;
+}

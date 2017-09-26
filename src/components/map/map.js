@@ -143,22 +143,22 @@ map.addListener('idle', function(){
 
 $(document).ready(function(){
    $('#directions-modal').modal();
-   var directionsBtn = $('<a href="#">')
-   .append($('<i class="material-icons">').text('directions'))
-   .css({
-      'background-color': '#fff',
-      color: '#747474',
-      'border-radius': '2px',
-      margin: '10px',
-      padding: '0 3px',
-      height: '25px',
-      'line-height': '25px',
-      'box-shadow': 'rgba(0, 0, 0, 0.3) 0px 1px 4px -1px'
-   })
-   .click(function(){
-      $('#directions-modal').modal('open');
-   });
-   map.controls[google.maps.ControlPosition.TOP_CENTER].push(directionsBtn[0]);
+   // var directionsBtn = $('<a href="#">')
+   // .append($('<i class="material-icons">').text('directions'))
+   // .css({
+   //    'background-color': '#fff',
+   //    color: '#747474',
+   //    'border-radius': '2px',
+   //    margin: '10px',
+   //    padding: '0 3px',
+   //    height: '25px',
+   //    'line-height': '25px',
+   //    'box-shadow': 'rgba(0, 0, 0, 0.3) 0px 1px 4px -1px'
+   // })
+   // .click(function(){
+   //    $('#directions-modal').modal('open');
+   // });
+   // map.controls[google.maps.ControlPosition.TOP_CENTER].push(directionsBtn[0]);
 
    var slider = $('#radius-slider');
    var circles = [];
@@ -189,6 +189,9 @@ $(document).ready(function(){
       circles = [];
       state.recreation.filterAll();
    });
+   slider.on('touchend', function(){
+      slider.blur();
+   })
    slider.on('input', function(){
       circles.forEach((c) => {
          c.setMap(null);
