@@ -22,7 +22,9 @@ state.route.on('change', function(e){
    if(state.route.locationCount === 1){
       directionsDisplay.set('directions', null);
       if(state.route.path[0].data.geometry){
-         map.fitBounds(e.val[0].data.geometry.viewport);
+         if(state.route.shouldZoomMap){
+            map.fitBounds(e.val[0].data.geometry.viewport);
+         }
          addMarker(e.val[0].data.geometry.location, 'route');
          //update route with one location
          state.map.directions.update(e.val[0].data.geometry.location);
@@ -34,7 +36,9 @@ state.route.on('change', function(e){
          });
          state.map.directions.update(coords);
          map.setCenter(coords);
-         map.setZoom(8);
+         if(state.route.shouldZoomMap){
+            map.setZoom(8);
+         }
          addMarker(coords, 'route');
       }
       else{
@@ -44,7 +48,9 @@ state.route.on('change', function(e){
          });
          state.map.directions.update(coords);
          map.setCenter(coords);
-         map.setZoom(8);
+         if(state.route.shouldZoomMap){
+            map.setZoom(8);
+         }
          addMarker(coords, 'route');
       }
    }
@@ -69,12 +75,12 @@ state.route.on('change', function(e){
             directionsDisplay.setDirections(result);
          }
          //else show some error toast?
-         state.route.shouldZoomMap = true;
       });
    }
    else{
       state.map.directions.update(null);
    }
+   state.route.shouldZoomMap = true;
 })
 
 let recAreaMarkers = [];

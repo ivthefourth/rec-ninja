@@ -164,6 +164,9 @@ function autofill(input, container, add, index){
 			else {
 				tooltip.mouseleave();
 				tooltip.detach();
+		 		if (state.route.path[index].type === "recarea"){
+		 			state.route.path[index].data.setInRoute(false);
+				}
 				state.route.remove(index, true);
 				state.route.insert(place, index);
 			}

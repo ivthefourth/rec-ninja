@@ -10,6 +10,7 @@ function setButtonStatus(canLoad){
 
       $('#find-rec').addClass('pulse').attr('disabled', false);
       $('#find-rec').attr('tabindex', 0);
+      clearTimeout(currentTimerId);
       currentTimerId = setTimeout(() => {$('#find-rec').removeClass('pulse')}, 10000);
    }
    else{
