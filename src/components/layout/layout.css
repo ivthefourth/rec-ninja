@@ -1,3 +1,19 @@
+/*fix for weird safari overflow*/
+.chip{
+   white-space: nowrap;
+   text-overflow: ellipsis;
+}
+
+
+#layout-loading-areas{
+   margin: 0;
+   z-index: 2;
+}
+
+.layout-sug-tabs, .layout-container-header{
+   z-index: 3;
+   position: relative;
+}
 
 @media screen and (min-width: 993px){
    .layout-logo{
@@ -31,7 +47,7 @@
 .layout-container{
    overflow-y: hidden;
 }
-.layout-shown, #map.layout-shown{
+.layout-shown-mobile, #map.layout-shown-mobile{
    z-index: 2;
 }
 
@@ -64,6 +80,8 @@
 .layout-suggestion-list{
    height: calc(100vh - 213px);
    overflow-y: auto;
+   padding-bottom: 40px;
+   padding-top: 20px;
 }
 
 .layout-scroll-top{
@@ -72,7 +90,7 @@
    top: 53px;
    position: absolute;
    width: calc(100% - 0.75rem);
-   background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%,rgba(255, 255, 255, 0.5) 60%,rgba(255,255,58,0) 100%);
+   background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%,rgba(255, 255, 255, 0.5) 60%,rgba(255,255,255,0) 100%);
    height: 20px;
 }
 .layout-scroll-bottom{
@@ -81,10 +99,41 @@
    bottom: 0;
    position: absolute;
    width: calc(100% - 0.75rem);
-   background: linear-gradient(to top, rgba(255, 255, 255, 1) 0%,rgba(255, 255, 255, 0.5) 60%,rgba(255,255,58,0) 100%);
+   background: linear-gradient(to top, rgba(255, 255, 255, 1) 0%,rgba(255, 255, 255, 0.5) 60%,rgba(255,255,255,0) 100%);
    height: 40px;
 }
 
 #suggestions-container .layout-scroll-top{
    top: 101px;
+}
+
+@media all and (min-width: 601px){
+   #map, .layout-container{
+      margin-bottom: 0;
+      top: 64px;
+      height: calc(100vh - 64px);
+   }
+   .layout-container{
+      transform: translateX(-330px);
+      transition: transform 0.5s ease;
+      width: 320px;
+      z-index: 3;    
+      -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+      box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+   }
+   .layout-container .layout-container-body{
+      height: calc(100vh - 117px);
+   }
+
+   .layout-shown{
+      transform: none;
+   }
+
+   .layout-suggestion-list{
+      height: calc(100vh - 165px);
+   }
+   #layout-loading-areas{
+      margin: 0;
+      z-index: 5;
+   }
 }

@@ -6,10 +6,11 @@ import state from '../state/state';
  function addChip() {
    for (let i = 0; i < state.interests.all.length; i++) {
       
-      let newChip = $('<div class="chip center"></div>');
+      let newChip = $('<a class="chip center" href="#"></a>');
       $("#unselected-interests").append(newChip.text(state.interests.all[i].name));
       
-      $(newChip).click(function() {
+      $(newChip).click(function(e) {
+         e.preventDefault();
          state.interests.all[i].toggle();
       });
    state.interests.all[i].on('change', function(e) {
@@ -39,7 +40,8 @@ $(document).ready(function(){
    addChip();
 
 
-   $("#clear-interests").click(function() {
+   $("#clear-interests").click(function(e) {
+      e.preventDefault();
    
       state.interests.selected.forEach(function(clear) {
          clear.update(false, true);

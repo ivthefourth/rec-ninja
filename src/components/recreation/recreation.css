@@ -1,0 +1,41 @@
+#filtered-container .collection, #bookmarked.collection{
+   border-right: none;
+   border-left: none;
+}
+
+.suggestion-summary{
+   overflow: hidden;
+}
+
+.suggestion-summary .title{
+   line-height: 1;
+   margin-top: 0.5em;
+   overflow: hidden;
+   white-space: nowrap;
+   text-overflow: ellipsis;
+   width: 100%;
+   display: inline-block;
+   font-size: 1.1em;
+}
+
+.suggestion-summary .rec-emojis{
+   width: 100%;
+   display: inline-block;
+}
+
+.suggestion-summary .rec-primary-content{
+   float: left;
+   width: calc(100% - 40px);
+}
+
+.rec-buttons{
+   width: 24px;
+}
+.rec-buttons a:last-child i{
+   vertical-align: middle;
+}
+
+.rec-navload-disabled{
+   cursor: default;
+   pointer-events: none;
+}

@@ -42,6 +42,31 @@ export var interestList = [
 
 ]
 
+//type is 'route' or 'bookmark'
+export function updateIcons(type, id, value) {
+    let btns = $(`.rec-${type}-icon[data-id="${id}"]`);
+    if(type === 'route'){
+        if(value){
+            btns.attr('title', 'remove from route');
+            btns.children().text('remove_circle_outline');
+        }
+        else{
+            btns.attr('title', 'add to route');
+            btns.children().text('add_circle_outline');
+        }
+    }
+    else if( type === 'bookmark'){
+        if(value){
+            btns.attr('title', 'remove bookmark');
+            btns.children().text('star');
+        }
+        else{
+            btns.attr('title', 'add bookmark');
+            btns.children().text('star_outline');
+        }
+    }
+}
+
 
 export function recApiQuery(latitudeVal,longitudeVal,radiusVal,activityVal,callback) {
 

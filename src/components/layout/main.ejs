@@ -24,16 +24,16 @@
       <div class="nav-wrapper">
          <a href="#" class="brand-logo left layout-logo">Rec Ninja</a>
          <ul class="layout-menu-options right hide-on-small-only">
-            <li><a class="btn-floating pink" title="interests"><i class="material-icons">landscape</i></a></li>
-            <li><a class="btn-floating deep-orange" title="route"><i class="material-icons">directions_car</i></a></li>
-            <li><a class="btn-floating amber modal-trigger" title="directions" href="#directions-modal"><i class="material-icons" >directions</i></a></li>
-            <li><a class="btn-floating green"  title="find recreation" href="#"><i class="material-icons" >search</i></a></li>
-            <li><a class="btn-floating blue" title="suggestions"><i class="material-icons">list</i></a></li>
+            <li><a class="btn-floating pink" title="interests" id="show-interests"><i class="material-icons">landscape</i></a></li>
+            <li><a class="btn-floating deep-orange" title="route" id="show-route"><i class="material-icons">directions_car</i></a></li>
+            <li><a class="btn-floating amber modal-trigger" title="directions" href="#directions-modal" id="show-directions" disabled><i class="material-icons" >directions</i></a></li>
+            <li><a class="btn-floating green"  title="find recreation" href="#" id="find-rec" disabled><i class="material-icons" >search</i></a></li>
+            <li><a class="btn-floating blue" title="suggestions" id="show-suggestions"><i class="material-icons">list</i></a></li>
             <li><a class="btn-floating purple modal-trigger" href="#tutorial-modal" title="about"><i class="material-icons">help_outline</i></a></li>
          </ul>
          <ul class="right hide-on-med-and-up">
             <li><a class="modal-trigger" title="directions" href="#directions-modal"><i class="material-icons">directions</i></a></li>
-            <li><a title="find recreation"><i class="material-icons blue-grey-text text-darken-2">search</i></a></li>
+            <li><a title="find recreation" id="mobile-find-rec"><i class="material-icons blue-grey-text text-darken-2">search</i></a></li>
             <li><a href="#tutorial-modal" class="modal-trigger"><i class="material-icons" title="about">help_outline</i></a></li>
          </ul>
       </div>
@@ -51,7 +51,7 @@
 
 
 
-   <div class="layout-container row layout-shown" id="interests-container">
+   <div class="layout-container row layout-shown-mobile" id="interests-container">
       <div class="layout-container-header">
          <h2><i class="material-icons">landscape</i> Interests</h2>
       </div>
@@ -65,11 +65,10 @@
                   <input type="range" id="radius-slider" min="10" max="50" step="5" value="50"/>
                </p>
             </form>
-            <h3>Selected <a id ="clear-interests">(Clear)</a></h3>
-            <div id="selected-interests" class="interests-chips-container">
+            <h3>Selected <a id ="clear-interests" href="#">(Clear)</a></h3>
+            <div id="selected-interests" class="interests-chips-container chips">
                <p class="center" id="interests-none-selected">No Interests Selected</p>
             </div>
-            <hr>
             <h3>Available</h3>
             <div id="unselected-interests" class="interests-chips-container"></div>
          </div>
@@ -87,6 +86,8 @@
    </div>
 
    <div id="map"></div>
+
+
    <div class="layout-container" id="suggestions-container">
       <div class="layout-container-header">
          <h2><i class="material-icons">list</i> Suggestions</h2>
@@ -94,20 +95,26 @@
       <div class="layout-scroll-top"></div>
       <div class="layout-scroll-bottom"></div>
       <div class="col s12" id="suggestions">
-         <ul class="tabs row">
-            <li class="tab col s6"><a class="active" href="#filtered-container">All</a></li>
-            <li class="tab col s6"><a href="#bookmarked">Bookmarked</a></li>
+         <ul class="tabs row layout-sug-tabs">
+            <li class="tab col s6"><a class="active teal-text" href="#filtered-container">All</a></li>
+            <li class="tab col s6"><a href="#bookmarked" class=" teal-text">Bookmarked</a></li>
+            <li class="indicator teal"></li>
          </ul>
          <div class="row layout-suggestion-list">
-            <div class="col s12">
+            <div>
                <div id="filtered-container">
                   <div id="button-container"></div>
-                  <div id="filtered"></div>
+                  <ul id="filtered" class="collection"></ul>
                </div>
-               <div id="bookmarked"></div>
+               <ul id="bookmarked" class="collection"></ul>
             </div>
          </div>
       </div>
+   </div>
+
+
+   <div class="progress pink" id="layout-loading-areas">
+      <div class="indeterminate orange"></div>
    </div>
 
    <!-- Modal Structure -->

@@ -155,7 +155,6 @@ function autofill(input, container, add, index){
 	// Google Places function - uses "autocomplete" placeholder defined in line above.
 	autocomplete.addListener('place_changed', function (){
 		var place = autocomplete.getPlace();
-		console.log(place);
 		if (place.place_id){
 			if (add){
 				tooltip.mouseleave();

@@ -1,5 +1,24 @@
 import state from '../state/state';
 
+let currentTimerId;
+
+function setButtonStatus(canLoad){
+   if(canLoad){
+      $('#mobile-find-rec').removeClass('rec-navload-disabled');
+      $('#mobile-find-rec i').removeClass('blue-grey-text text-darken-2');
+
+      $('#find-rec').addClass('pulse').attr('disabled', false);
+      currentTimerId = setTimeout(() => {$('#find-rec').removeClass('pulse')}, 10000);
+   }
+   else{
+      $('#mobile-find-rec').addClass('rec-navload-disabled');
+      $('#mobile-find-rec i').addClass('blue-grey-text text-darken-2');
+
+      $('#find-rec').removeClass('pulse').attr('disabled', true);
+      clearTimeout(currentTimerId);
+   }
+}
+
 function showButton(status) {
    var container = $('#button-container');
    var text;
@@ -17,18 +36,22 @@ function showButton(status) {
    if(status.val.firstLoad && noInterest && noLocation){
       text = 'Select some interests and choose at least one location to get started';
       btn.attr('disabled', true);
+      setButtonStatus(false);
    }
    else if(status.val.firstLoad && noInterest){
       text = 'Select at least one interest to get started';
       btn.attr('disabled', true);
+      setButtonStatus(false);
    }
    else if(status.val.firstLoad && noLocation){
       text = 'Select at least one location to get started';
       btn.attr('disabled', true);
+      setButtonStatus(false);
    }
    else if(status.val.firstLoad){
       text = 'Click the button to get started'
       icon = null;
+      setButtonStatus(true);
       btn.addClass('pulse');
       setTimeout(function(){
          btn.removeClass('pulse');
@@ -37,14 +60,17 @@ function showButton(status) {
    else if(noInterest){
       text = 'Select at least one interest to search for recreation areas';
       btn.attr('disabled', true);
+      setButtonStatus(false);
    }
    else if(noLocation){
       text = 'Select at least one location to search for recreation areas';
       btn.attr('disabled', true);
+      setButtonStatus(false);
    }
    else{
       text = 'New recreation areas may be available.'
       icon = null;
+      setButtonStatus(true);
       btn.addClass('pulse');
       setTimeout(function(){
          btn.removeClass('pulse');
@@ -54,8 +80,11 @@ function showButton(status) {
    container.empty();
    if( status.val.shouldLoad || status.val.firstLoad || !status.val.canLoad){
       container.append($('<p>').text(text).prepend(icon), btn);
+      $('#layout-loading-areas').hide();
    }
    else if(status.val.loading){
+      setButtonStatus(false);
+      $('#layout-loading-areas').show();
       text = 'Loading recreation areas…'
       container.append($('<p>').text(text), 
          `<div class="preloader-wrapper big active">
@@ -69,6 +98,10 @@ function showButton(status) {
                </div>
              </div>
            </div>`);
+   }
+   else{
+      setButtonStatus(false);
+      $('#layout-loading-areas').hide();
    }
 }
 

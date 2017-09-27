@@ -1,5 +1,5 @@
 import {retrieveSingleRecArea} from '../recreation/recAreaDetails';
-import {recApiQuery, interestList} from '../recreation/constants';
+import {recApiQuery, interestList, updateIcons} from '../recreation/constants';
 import map from '../map/mapconstant';
 import distanceMatrix from '../map/distance';
 
@@ -549,6 +549,13 @@ class RecArea extends EventObject{
       this.markerDisplayed = false;
       this.markerHighlighted = false;
 
+      this.on('bookmarked', () => {
+         updateIcons('bookmark', this.id, this.bookmarked);
+      });
+      this.on('inroute', () => {
+         updateIcons('route', this.id, this.inRoute);
+      });
+
       this.showDetails = this.showDetails.bind(this);
       this.highlightMarker = this.highlightMarker.bind(this)
       this.unHighlightMarker = this.unHighlightMarker.bind(this)
@@ -563,6 +570,9 @@ class RecArea extends EventObject{
    setBookmarked(/*boolean*/ value){
       this.bookmarked = value;
       this.emit('bookmarked');
+      if(!value){
+         this.unHighlightMarker();
+      }
    }
    setInRoute(/*boolean*/ value){
       this.inRoute = value;
@@ -620,7 +630,7 @@ class RecArea extends EventObject{
    }
 
    makeEvent(event){
-      console.warn(event);
+      //console.warn(event);
    }
    toString(){
       return 'RecArea';
@@ -786,6 +796,16 @@ class Recreation{
          this.bookmarked.remove(area);
       }
    }
+   toggleBookmark(area){
+      if(area.bookmarked){
+         this.removeBookmark(area);
+         Materialize.toast('Bookmark removed!', 1000);
+      }
+      else{
+         this.addBookmark(area);
+         Materialize.toast('Bookmark added!', 1000);
+      }
+   }
    addToRoute(area){
       if(!area.inRoute){
          area.setInRoute(true);
@@ -797,6 +817,16 @@ class Recreation{
       if(area.inRoute){
          area.setInRoute(false);
          state.route.removeRecArea(area);
+      }
+   }
+   toggleInRoute(area){
+      if(area.inRoute){
+         this.removeFromRoute(area);
+         if(!area.inRoute) Materialize.toast('Removed from Route!', 1000);
+      }
+      else{
+         this.addToRoute(area);
+         if(area.inRoute) Materialize.toast('Added to Route!', 1000);
       }
    }
 
