@@ -4,9 +4,19 @@ import state from '../state/state';
 state.route.on('change', function(e){
    if(e.val.length >= 2){
       $('#show-directions').attr('disabled', false);
+      $('#show-directions').attr('tabindex', 0);
+
+      $('#mobile-show-directions').removeClass('rec-navload-disabled');
+      $('#mobile-show-directions i').removeClass('blue-grey-text text-darken-2');
+      $('#mobile-show-directions').attr('tabindex', 0);
    }
    else{
       $('#show-directions').attr('disabled', true);
+      $('#show-directions').attr('tabindex', -1);
+
+      $('#mobile-show-directions').addClass('rec-navload-disabled');
+      $('#mobile-show-directions i').addClass('blue-grey-text text-darken-2');
+      $('#mobile-show-directions').attr('tabindex', -1);
    }
 });
 
@@ -30,32 +40,39 @@ $(document).ready(function() {
    $('#mobile-show-interests').click(function(e){
       e.preventDefault();
       mobileShow('#interests-container');
+      $(this).blur();
    });
    $('#mobile-show-route').click(function(e){
       e.preventDefault();
       mobileShow('#route-container');
+      $(this).blur();
    });
    $('#mobile-show-map').click(function(e){
       e.preventDefault();
       mobileShow('#map');
+      $(this).blur();
    });
    $('#mobile-show-suggestions').click(function(e){
       e.preventDefault();
       mobileShow('#suggestions-container');
+      $(this).blur();
    });
 
    //non-mobile buttons:
    $('#show-interests').click(function(e){
       e.preventDefault();
       show('#interests-container');
+      $(this).blur();
    });
    $('#show-route').click(function(e){
       e.preventDefault();
       show('#route-container');
+      $(this).blur();
    });
    $('#show-suggestions').click(function(e){
       e.preventDefault();
       show('#suggestions-container');
+      $(this).blur();
    });
 
 });

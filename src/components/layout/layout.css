@@ -4,6 +4,13 @@
    text-overflow: ellipsis;
 }
 
+.layout-header-menu .btn-floating:focus, 
+.layout-footer-menu .btn-floating:focus,
+.layout-header-menu .btn-floating:hover, 
+.layout-footer-menu .btn-floating:hover{
+   transform: scale(1.2);
+}
+
 
 #layout-loading-areas{
    margin: 0;

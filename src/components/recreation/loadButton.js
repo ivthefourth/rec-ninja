@@ -6,15 +6,19 @@ function setButtonStatus(canLoad){
    if(canLoad){
       $('#mobile-find-rec').removeClass('rec-navload-disabled');
       $('#mobile-find-rec i').removeClass('blue-grey-text text-darken-2');
+      $('#mobile-find-rec').attr('tabindex', 0);
 
       $('#find-rec').addClass('pulse').attr('disabled', false);
+      $('#find-rec').attr('tabindex', 0);
       currentTimerId = setTimeout(() => {$('#find-rec').removeClass('pulse')}, 10000);
    }
    else{
       $('#mobile-find-rec').addClass('rec-navload-disabled');
       $('#mobile-find-rec i').addClass('blue-grey-text text-darken-2');
+      $('#mobile-find-rec').attr('tabindex', -1);
 
       $('#find-rec').removeClass('pulse').attr('disabled', true);
+      $('#find-rec').attr('tabindex', -1);
       clearTimeout(currentTimerId);
    }
 }

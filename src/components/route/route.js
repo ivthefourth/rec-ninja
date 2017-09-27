@@ -139,7 +139,7 @@ state.route.on("change", function (e){
 		buttonSection.append("<div id='newbuttons'>");
 		$("#newbuttons")
 		.append(
-			$("<a class='btn waves-effect waves-light' id='route-addBtn'>")
+			$("<a class='btn waves-effect waves-light' id='route-addBtn' href='#'>")
 			.text('Add Location')
 			.prepend('<i class="material-icons left">add</i>')
 		);
@@ -177,7 +177,8 @@ function autofill(input, container, add, index){
 }
 
 // Get the HTML input element for the autocomplete search box and create the autocomplete object.
-function newInputField() {
+function newInputField(e) {
+	if(e) e.preventDefault();
 	$("#newbuttons").remove();
 	var inputfield = $("<input>");
 	buttonSection.append(inputfield);
