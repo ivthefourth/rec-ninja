@@ -62,16 +62,19 @@ $(document).ready(function() {
    $('#show-interests').click(function(e){
       e.preventDefault();
       show('#interests-container');
+      largeShow('layout-show-interests');
       $(this).blur();
    });
    $('#show-route').click(function(e){
       e.preventDefault();
       show('#route-container');
+      largeShow('layout-show-route');
       $(this).blur();
    });
    $('#show-suggestions').click(function(e){
       e.preventDefault();
       show('#suggestions-container');
+      largeShow('layout-show-suggestions');
       $(this).blur();
    });
 
@@ -90,6 +93,11 @@ function show(divId){
       $('.layout-shown').removeClass('layout-shown');
       $(divId).addClass('layout-shown');
    }
+}
+
+function largeShow(className){
+   let body = $('body').first();
+   body.toggleClass(className);
 }
 
 

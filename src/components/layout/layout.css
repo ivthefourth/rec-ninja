@@ -22,6 +22,12 @@
    position: relative;
 }
 
+body{
+   width: 100vw;
+   height: 100vh;
+   overflow: hidden;
+}
+
 @media screen and (min-width: 993px){
    .layout-logo{
       left: 0.5rem;
@@ -145,7 +151,88 @@
    }
 }
 
+@media all and (min-width: 992px){
+   .layout-scroll-top{
+      top: 55px;
+   }
+   #suggestions-container .layout-scroll-top{
+      top: 103px;
+   }
+
+   .layout-container{
+      transform: translateX(-330px);
+   }
+
+   #route-container{
+      bottom: 0;
+      top: auto;
+      height: auto;
+   }
+   #route-container .layout-container-body,
+   #interests-container .layout-container-body{
+      transition: height 0.5s ease, padding 0.5s ease;
+      height: calc(100vh - 174px);
+   }
+   #route-container .layout-container-header{
+      border-top: 1px solid #ddd;
+   }
+
+   #interests-container{
+      height: auto;
+   }
+
+   #suggestions-container{
+      right: 0;
+      transform: translateX(330px);
+   }
+
+   /*interests open*/
+   .layout-show-interests #interests-container{
+      transform: none;
+   }
+   .layout-show-interests #route-container{
+      transform: none;
+   }
+   .layout-show-interests #route-container .layout-container-body{
+      height: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+   }
+
+   /*route open*/
+   .layout-show-route #route-container{
+      transform: none;
+   }
+   .layout-show-route #interests-container{
+      transform: none;
+   }
+   .layout-show-route #route-container .layout-container-body{
+      padding-top: 20px;
+      padding-bottom: 40px;
+      height: calc(100vh - 174px);
+   }
+
+   /*route AND interests open*/
+   .layout-show-route.layout-show-interests #route-container .layout-container-body,
+   .layout-show-route.layout-show-interests #interests-container .layout-container-body{
+      height: calc(50vh - 87px);
+      padding-top: 20px;
+      padding-bottom: 40px;
+   }
+
+
+
+   /*suggestions open*/
+   .layout-show-suggestions #suggestions-container{
+      transform: none;
+   }
+}
+
+
 @media print{
+   body{
+      height: auto;
+   }
    #directions-modal{ 
       display: block !important;
       position: absolute !important;
