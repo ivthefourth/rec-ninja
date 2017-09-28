@@ -23,6 +23,7 @@
 }
 
 body{
+   opacity: 1;
    width: 100vw;
    height: 100vh;
    overflow: hidden;
@@ -56,12 +57,17 @@ body{
    height: calc(100vh - 112px);
    z-index: 0;
    background-color: #fff;
+
+   visibility: hidden;
+   opacity: 0;
 }
 .layout-container{
    overflow-y: hidden;
 }
 .layout-shown-mobile, #map.layout-shown-mobile{
    z-index: 2;
+   visibility: visible;
+   opacity: 1;
 }
 
 .layout-container-header{
@@ -121,6 +127,14 @@ body{
 }
 
 @media all and (min-width: 601px){
+   .layout-shown-mobile{
+      visibility: hidden;
+      opacity: 0;
+   }
+   #map{
+      visibility: visible;
+      opacity: 1;
+   }
    #map, .layout-container{
       margin-bottom: 0;
       top: 64px;
@@ -138,8 +152,12 @@ body{
       height: calc(100vh - 117px);
    }
 
-   .layout-shown{
+   .layout-med-shown{
       transform: none;
+   }
+   .layout-med-visible{
+      visibility: visible;
+      opacity: 1;
    }
 
    .layout-suggestion-list{
@@ -161,11 +179,13 @@ body{
 
    .layout-container{
       transform: translateX(-330px);
+      visibility: hidden;
+      opacity: 0;
    }
 
    #route-container{
       bottom: 0;
-      top: auto;
+      top: auto;  
       height: auto;
    }
    #route-container .layout-container-body,

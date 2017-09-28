@@ -61,19 +61,22 @@ $(document).ready(function() {
    //non-mobile buttons:
    $('#show-interests').click(function(e){
       e.preventDefault();
-      show('#interests-container');
+      medShow('#interests-container');
+
       largeShow('layout-show-interests');
       $(this).blur();
    });
    $('#show-route').click(function(e){
       e.preventDefault();
-      show('#route-container');
+      medShow('#route-container');
+
       largeShow('layout-show-route');
       $(this).blur();
    });
    $('#show-suggestions').click(function(e){
       e.preventDefault();
-      show('#suggestions-container');
+      medShow('#suggestions-container');
+
       largeShow('layout-show-suggestions');
       $(this).blur();
    });
@@ -85,13 +88,27 @@ function mobileShow(divId){
    $(divId).addClass('layout-shown-mobile');
 }
 
-function show(divId){
-   if( $(divId).hasClass('layout-shown')){
-      $(divId).removeClass('layout-shown');
+const timerIds = {
+}
+function medShow(divId){
+   let div = $(divId);
+   if( div.hasClass('layout-med-shown')){
+      div.removeClass('layout-med-shown');
+      timerIds[divId] = setTimeout(() => { 
+         div.removeClass('layout-med-visible');
+      }, 500);
    }
    else{
-      $('.layout-shown').removeClass('layout-shown');
-      $(divId).addClass('layout-shown');
+      let shown = $('.layout-med-shown');
+      if(shown.length){
+         timerIds[ '#' + shown.first().attr('id')] = setTimeout(() => { 
+            shown.removeClass('layout-med-visible');
+         }, 500);
+         shown.removeClass('layout-med-shown');
+      }
+      console.log(timerIds);
+      div.addClass('layout-med-shown layout-med-visible');
+      clearTimeout(timerIds[divId]);
    }
 }
 
