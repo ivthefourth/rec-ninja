@@ -2,7 +2,8 @@
 
 [Live Link](https://ivthefourth.github.io/rec-ninja/)
 
-[![Stories in Ready](https://badge.waffle.io/ivthefourth/project-1.svg?label=ready&title=Ready)](https://waffle.io/ivthefourth/project-1)
+[![Waffle.io - Issues in progress](https://badge.waffle.io/ivthefourth/rec-ninja.svg?label=in%20progress&title=In%20Progress)](http://waffle.io/ivthefourth/rec-ninja)
+
 
 
 ## Contents
@@ -14,11 +15,13 @@
 
 ## About
 
+Plan a trip and find recreation areas along your route.
+
 ### Contributors:
-* Elizabeth
-* Jon Caviness
-* Howard
-* Trevor Nelson
+* [Elizabeth](https://github.com/2krazykats)
+* [Jon Caviness](https://github.com/vacnoj)
+* [Howard](https://github.com/ivthefourth)
+* [Trevor Nelson](https://github.com/tsnelson86)
 
 
 ## Important Links
@@ -32,11 +35,11 @@
 ### Library Docs
 * [Materialize Docs](http://materializecss.com/)
 * [jQuery Docs](https://api.jquery.com/)
+* [jQuery UI](https://jqueryui.com/)
 * [webpack](https://webpack.js.org/)
 
 ### API Docs
 * [RIDB API Docs (recreation.gov)](https://usda.github.io/RIDB/)
-	- API Key: 2C1B2AC69E1945DE815B69BBCC9C7B19
 * [Google Places Autocomplete](https://developers.google.com/maps/documentation/javascript/places-autocomplete)
     - [Places](https://developers.google.com/maps/documentation/javascript/places)
 * [Google Directions](https://developers.google.com/maps/documentation/javascript/directions)
