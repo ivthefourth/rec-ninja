@@ -27,8 +27,7 @@ Plan a trip and find recreation areas along your route.
 ## Important Links
 
 ### Project Info
-* [Milestones](https://github.com/ivthefourth/project-1/milestones)
-* [Waffle (Task Manager)](https://waffle.io/ivthefourth/project-1)
+* [Waffle (Task Manager)](https://waffle.io/ivthefourth/rec-ninja)
 * [User Stories](https://docs.google.com/document/d/1YPNBCu6e3rBdH7EmJNTHmhsZOrDXebbFNvsH5ubqLFg/)
 * [Project Proposal](https://docs.google.com/document/d/1MgKZKyFO4m7cpf0CrR8cDIUgZWh9oPvnBqRZu461Bfw/)
 
@@ -56,7 +55,7 @@ When Completing a new task:
     * `git checkout master`
 2. Pull from GitHub so you're up to date
     * `git pull`
-3. Look at items in the **Ready** column (not Backlog) on [Waffle](https://waffle.io/ivthefourth/project-1) and choose a task to work on that is either assigned to you or unassigned. If your choice is unassigned, assign yourself by clicking the user icon at the top right of the task and then selecting yourself
+3. Look at items in the **Ready** column (not Backlog) on [Waffle](https://waffle.io/ivthefourth/rec-ninja) and choose a task to work on that is either assigned to you or unassigned. If your choice is unassigned, assign yourself by clicking the user icon at the top right of the task and then selecting yourself
     * ![Example Task](docs/example-task.png)
 4. Create a branch, and name it starting with the number of the chosen task (top left) followed by a '-' and then a short description 
     * `git branch 31-howard-test`
@@ -68,7 +67,7 @@ When Completing a new task:
 7. When you've completed the task, commit and push the latest changes to GitHub
     * `git commit -m "description"` 
     * `git push`
-8. Once branch is up to date on GitHub, submit a [pull request on GitHub](https://github.com/ivthefourth/project-1/branches) from your branch, and use the phrase "Closes #n" in the title; this will move the task into the **Under Review** column
+8. Once branch is up to date on GitHub, submit a [pull request on GitHub](https://github.com/ivthefourth/rec-ninja/branches) from your branch, and use the phrase "Closes #n" in the title; this will move the task into the **Under Review** column
     > Closes #31 added howard to contributors
 9. You can start working on another task (return to step 1) until code is reviewed
 10. If a review shows that changes need to be made before the branch can merge, make those changes on the appropriate branch (31-howard-test in this case), then commit and push again. You don't have to open another pull request. You can click the pull request icon on a task (bottom left) in the **Under Review** column on Waffle to view the pull request in GitHub.
