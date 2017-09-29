@@ -38,22 +38,12 @@
          </ul>
       </div>
    </nav>
-   <nav class="blue-grey darken-4 center layout-footer-menu hide-on-med-and-up">
-      <div class="nav-wrapper">
-         <ul class="layout-menu-options--footer center">
-            <li><a id="mobile-show-interests" class="btn-floating red" title="interests" href="#"><i class="material-icons">landscape</i></a></li>
-            <li><a id="mobile-show-route" class="btn-floating orange" title="route" href="#"><i class="material-icons">directions_car</i></a></li>
-            <li class="hide-on-med-and-up"><a  id="mobile-show-map" class="btn-floating green" title="map" href="#"><i class="material-icons">place</i></a></li>
-            <li><a  id="mobile-show-suggestions" class="btn-floating blue" title="suggestions" href="#"><i class="material-icons">list</i></a></li>
-         </ul>
-      </div>
-   </nav>
 
 
 
-   <div class="layout-container row layout-shown-mobile" id="interests-container">
+   <div class="layout-container row" id="interests-container">
       <div class="layout-container-header">
-         <h2><i class="material-icons">landscape</i> Interests</h2>
+         <h2><i class="material-icons">landscape</i> Interests <a class="grey-text" href="#" id="collapse-interests"><i class="material-icons layout-hi-expand">expand_more</i><i class="material-icons layout-hi-collapse">expand_less</i><i class="material-icons layout-hi-hide">chevron_left</i></a></h2>
       </div>
       <div class="layout-scroll-top"></div>
       <div class="layout-scroll-bottom"></div>
@@ -76,7 +66,7 @@
    </div>
    <div class="layout-container row" id="route-container">
       <div class="layout-container-header">
-         <h2><i class="material-icons">directions_car</i> Route</h2>
+         <h2><i class="material-icons">directions_car</i> Route <a class="grey-text" href="#" id="collapse-route"><i class="material-icons layout-hi-expand">expand_more</i><i class="material-icons layout-hi-collapse">expand_less</i><i class="material-icons layout-hi-hide">chevron_left</i></a></h2>
       </div>
       <div class="layout-scroll-top"></div>
       <div class="layout-scroll-bottom"></div>
@@ -85,12 +75,9 @@
       </div>
    </div>
 
-   <div id="map"></div>
-
-
    <div class="layout-container" id="suggestions-container">
       <div class="layout-container-header">
-         <h2><i class="material-icons">list</i> Suggestions</h2>
+         <h2><i class="material-icons">list</i> Suggestions <a class="grey-text" href="#" id="collapse-suggestions"><i class="material-icons">chevron_right</i><i class="material-icons">chevron_left</i></a></h2>
       </div>
       <div class="layout-scroll-top"></div>
       <div class="layout-scroll-bottom"></div>
@@ -112,10 +99,23 @@
       </div>
    </div>
 
+   <div id="map" class="layout-shown-mobile"></div>
 
    <div class="progress pink" id="layout-loading-areas">
       <div class="indeterminate orange"></div>
    </div>
+
+
+   <nav class="blue-grey darken-4 center layout-footer-menu hide-on-med-and-up">
+      <div class="nav-wrapper">
+         <ul class="layout-menu-options--footer center">
+            <li><a id="mobile-show-interests" class="btn-floating red" title="interests" href="#"><i class="material-icons">landscape</i></a></li>
+            <li><a id="mobile-show-route" class="btn-floating orange" title="route" href="#"><i class="material-icons">directions_car</i></a></li>
+            <li class="hide-on-med-and-up"><a  id="mobile-show-map" class="btn-floating green" title="map" href="#"><i class="material-icons">place</i></a></li>
+            <li><a  id="mobile-show-suggestions" class="btn-floating blue" title="suggestions" href="#"><i class="material-icons">list</i></a></li>
+         </ul>
+      </div>
+   </nav>
 
    <!-- Modal Structure -->
    <div id="modal1" class="modal modal-fixed-footer">

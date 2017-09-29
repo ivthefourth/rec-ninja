@@ -61,21 +61,42 @@ $(document).ready(function() {
    //non-mobile buttons:
    $('#show-interests').click(function(e){
       e.preventDefault();
-      show('#interests-container');
+      medShow('#interests-container');
+
       largeShow('layout-show-interests');
       $(this).blur();
    });
+   $('#collapse-interests').click(function(e){
+      e.preventDefault();
+      medShow('#interests-container');
+
+      largeShow('layout-show-interests', true);
+   });
    $('#show-route').click(function(e){
       e.preventDefault();
-      show('#route-container');
+      medShow('#route-container');
+
       largeShow('layout-show-route');
       $(this).blur();
    });
+   $('#collapse-route').click(function(e){
+      e.preventDefault();
+      medShow('#route-container');
+
+      largeShow('layout-show-route', true);
+   });
    $('#show-suggestions').click(function(e){
       e.preventDefault();
-      show('#suggestions-container');
+      medShow('#suggestions-container');
+
       largeShow('layout-show-suggestions');
       $(this).blur();
+   });
+   $('#collapse-suggestions').click(function(e){
+      e.preventDefault();
+      medShow('#suggestions-container');
+
+      largeShow('layout-show-suggestions');
    });
 
 });
@@ -85,19 +106,162 @@ function mobileShow(divId){
    $(divId).addClass('layout-shown-mobile');
 }
 
-function show(divId){
-   if( $(divId).hasClass('layout-shown')){
-      $(divId).removeClass('layout-shown');
+const timerIds = {
+}
+function medShow(divId){
+   let div = $(divId);
+   if( div.hasClass('layout-med-shown')){
+      div.removeClass('layout-med-shown');
+      timerIds[divId] = setTimeout(() => { 
+         div.removeClass('layout-med-visible');
+      }, 500);
    }
    else{
-      $('.layout-shown').removeClass('layout-shown');
-      $(divId).addClass('layout-shown');
+      let shown = $('.layout-med-shown');
+      if(shown.length){
+         timerIds[ '#' + shown.first().attr('id')] = setTimeout(() => { 
+            shown.removeClass('layout-med-visible');
+         }, 500);
+         shown.removeClass('layout-med-shown');
+      }
+      div.addClass('layout-med-shown layout-med-visible');
+      clearTimeout(timerIds[divId]);
    }
 }
 
-function largeShow(className){
+//this should be refactored to not be so hideous and repetitive
+function largeShow(className, clickedFromCollapse){
    let body = $('body').first();
-   body.toggleClass(className);
+   if(
+      clickedFromCollapse &&
+      body.hasClass('layout-show-interests') && 
+      body.hasClass('layout-show-route')
+   ){
+      body.removeClass(className);
+      if(className === 'layout-show-route'){
+         timerIds.routeVisibility = setTimeout(() => {
+            body.removeClass('layout-route-visible');
+         }, 500);
+      }
+      else if(className === 'layout-show-interests'){
+         timerIds.interestsVisibility = setTimeout(() => {
+            body.removeClass('layout-interests-visible');
+         }, 500);
+      }
+      return;
+   }
+   else if(clickedFromCollapse && !body.hasClass(className)){
+      body.addClass(className);
+      if(className === 'layout-show-route'){
+         body.addClass('layout-route-visible');
+         clearTimeout(timerIds.routeVisibility);
+      }
+      else if(className === 'layout-show-interests'){
+         body.addClass('layout-interests-visible');
+         clearTimeout(timerIds.interestsVisibility);
+      }
+      return;
+   }
+
+   //if this is to show suggestions
+   if( className === 'layout-show-suggestions'){
+      //just toggle whether suggestions is open/closed
+      if(body.hasClass(className)){
+         body.removeClass(className);
+         timerIds[className] = setTimeout(() => { 
+            body.removeClass('layout-right-sb-visible');
+         }, 500);
+      }
+      else{
+         clearTimeout(timerIds[className]);
+         body.addClass('layout-right-sb-visible ' + className);
+      }
+   }
+   else{
+      //if interests and route are both open
+      if(
+         body.hasClass('layout-left-sb-open') &&
+         body.hasClass('layout-show-interests') && 
+         body.hasClass('layout-show-route')
+      ){
+         //just remove the not selected 
+         body.removeClass('layout-show-interests layout-show-route');
+         body.addClass(className);
+         if(className === 'layout-show-route'){
+            timerIds.routeVisibility = setTimeout(() => {
+               body.removeClass('layout-route-visible');
+            }, 500);
+         }
+         else if(className === 'layout-show-interests'){
+            timerIds.interestsVisibility = setTimeout(() => {
+               body.removeClass('layout-interests-visible');
+            }, 500);
+         }
+      }
+      //else if neither is open
+      else if(!body.hasClass('layout-left-sb-open')){
+         //open sidebar and show selected 
+         clearTimeout(timerIds.leftSideBar);
+         body.removeClass('layout-show-interests layout-show-route');
+         body.addClass('layout-left-sb-visible layout-left-sb-open');
+         body.addClass(className);
+         if(className === 'layout-show-route'){
+            body.addClass('layout-route-visible');
+            clearTimeout(timerIds.routeVisibility);
+         }
+         else if(className === 'layout-show-interests'){
+            body.addClass('layout-interests-visible');
+            clearTimeout(timerIds.interestsVisibility);
+         }
+         setTimeout(() => {body.addClass('layout-left-height-should-animate')}, 1);
+      }
+      //else if the selected is not open
+      else if (!body.hasClass(className)){
+         //close the unselected and open selected
+         body.addClass(className);
+         if(className === 'layout-show-route'){
+            body.addClass('layout-route-visible');
+            clearTimeout(timerIds.routeVisibility);
+         }
+         else if(className === 'layout-show-interests'){
+            body.addClass('layout-interests-visible');
+            clearTimeout(timerIds.interestsVisibility);
+         }
+         if(className === 'layout-show-interests'){
+            body.removeClass('layout-show-route');
+            timerIds.routeVisibility = setTimeout(() => {
+               body.removeClass('layout-route-visible');
+            }, 500);
+         }
+         else{
+            body.removeClass('layout-show-interests');
+            timerIds.interestsVisibility = setTimeout(() => {
+               body.removeClass('layout-interests-visible');
+            }, 500);
+         }
+      }
+      //else if the selected is open
+      else{
+         //close the sidebar and set timeout to remove the class
+         body.removeClass('layout-left-height-should-animate');
+         body.removeClass('layout-left-sb-open');
+         timerIds.leftSideBar = setTimeout(() => {
+            body.removeClass('layout-left-sb-visible');
+            body.removeClass(className);
+         }, 500);
+         if(className === 'layout-show-route'){
+            timerIds.routeVisibility = setTimeout(() => {
+               body.removeClass('layout-route-visible');
+            }, 500);
+         }
+         else if(className === 'layout-show-interests'){
+            timerIds.interestsVisibility = setTimeout(() => {
+               body.removeClass('layout-interests-visible');
+            }, 500);
+         }
+      }
+   }
+   //Note: side bar open class should allow heights to animate?
 }
 
 
