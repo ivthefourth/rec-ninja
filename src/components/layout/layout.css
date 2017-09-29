@@ -190,7 +190,6 @@ body{
    }
    #route-container .layout-container-body,
    #interests-container .layout-container-body{
-      transition: height 0.5s ease, padding 0.5s ease;
       height: calc(100vh - 174px);
    }
    #route-container .layout-container-header{
@@ -207,12 +206,12 @@ body{
    }
 
    /*interests open*/
-   .layout-show-interests #interests-container{
+/*   .layout-show-interests #interests-container{
       transform: none;
    }
    .layout-show-interests #route-container{
       transform: none;
-   }
+   }*/
    .layout-show-interests #route-container .layout-container-body{
       height: 0;
       padding-top: 0;
@@ -220,12 +219,12 @@ body{
    }
 
    /*route open*/
-   .layout-show-route #route-container{
+  /* .layout-show-route #route-container{
       transform: none;
    }
    .layout-show-route #interests-container{
       transform: none;
-   }
+   }*/
    .layout-show-route #route-container .layout-container-body{
       padding-top: 20px;
       padding-bottom: 40px;
@@ -240,9 +239,26 @@ body{
       padding-bottom: 40px;
    }
 
-
+   /*route AND/OR interests open */
+   .layout-left-sb-visible #route-container,
+   .layout-left-sb-visible #interests-container{
+      visibility: visible;
+      opacity: 1;
+   }
+   .layout-left-sb-open #route-container,
+   .layout-left-sb-open #interests-container{
+      transform: none;
+   }
+   .layout-left-height-should-animate #route-container .layout-container-body,
+   .layout-left-height-should-animate #interests-container .layout-container-body{
+      transition: height 0.5s ease, padding 0.5s ease;
+   }
 
    /*suggestions open*/
+   .layout-right-sb-visible #suggestions-container{
+      visibility: visible;
+      opacity: 1;
+   }
    .layout-show-suggestions #suggestions-container{
       transform: none;
    }

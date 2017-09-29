@@ -106,7 +106,6 @@ function medShow(divId){
          }, 500);
          shown.removeClass('layout-med-shown');
       }
-      console.log(timerIds);
       div.addClass('layout-med-shown layout-med-visible');
       clearTimeout(timerIds[divId]);
    }
@@ -114,7 +113,67 @@ function medShow(divId){
 
 function largeShow(className){
    let body = $('body').first();
-   body.toggleClass(className);
+   //if this is to show suggestions
+   if( className === 'layout-show-suggestions'){
+      //just toggle whether suggestions is open/closed
+      if(body.hasClass(className)){
+         body.removeClass(className);
+         timerIds[className] = setTimeout(() => { 
+            body.removeClass('layout-right-sb-visible');
+         }, 500);
+      }
+      else{
+         clearTimeout(timerIds[className]);
+         body.addClass('layout-right-sb-visible ' + className);
+      }
+   }
+   else{
+      //if interests and route are both open
+      if(
+         body.hasClass('layout-left-sb-open') &&
+         body.hasClass('layout-show-interests') && 
+         body.hasClass('layout-show-route')
+      ){
+         //just remove the not selected 
+         body.removeClass('layout-show-interests layout-show-route');
+         body.addClass(className);
+      }
+      //else if neither is open
+      else if(!body.hasClass('layout-left-sb-open')){
+         //open sidebar and show selected 
+         clearTimeout(timerIds.leftSideBar);
+         body.removeClass('layout-show-interests layout-show-route');
+         body.addClass('layout-left-sb-visible layout-left-sb-open');
+         body.addClass(className);
+         setTimeout(() => {body.addClass('layout-left-height-should-animate')}, 1);
+      }
+      //else if the selected is not open
+      else if (!body.hasClass(className)){
+         //close the unselected and open selected
+         body.addClass(className);
+         if(className === 'layout-show-interests'){
+            body.removeClass('layout-show-route');
+            //need to set visibility on route layout-container-body to hidden
+            //after animation
+         }
+         else{
+            body.removeClass('layout-show-interests');
+            //need to set visibility on interests layout-container-body to hidden
+            //after animation
+         }
+      }
+      //else if the selected is open
+      else{
+         //close the sidebar and set timeout to remove the class
+         body.removeClass('layout-left-height-should-animate');
+         body.removeClass('layout-left-sb-open');
+         timerIds.leftSideBar = setTimeout(() => {
+            body.removeClass('layout-left-sb-visible');
+            body.removeClass(className);
+         }, 500);
+      }
+   }
+   //Note: side bar open class should allow heights to animate?
 }
 
 
