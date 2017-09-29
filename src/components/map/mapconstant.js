@@ -3,7 +3,8 @@ const map = new google.maps.Map(document.getElementById('map'), {
   zoom: 5,
   fullscreenControl: false,
   mapTypeControl: false,
-  streetViewControl: false
+  streetViewControl: false,
+  gestureHandling: 'greedy'
 });
 
 export default map;
