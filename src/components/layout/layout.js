@@ -66,6 +66,12 @@ $(document).ready(function() {
       largeShow('layout-show-interests');
       $(this).blur();
    });
+   $('#collapse-interests').click(function(e){
+      e.preventDefault();
+      medShow('#interests-container');
+
+      largeShow('layout-show-interests', true);
+   });
    $('#show-route').click(function(e){
       e.preventDefault();
       medShow('#route-container');
@@ -73,12 +79,24 @@ $(document).ready(function() {
       largeShow('layout-show-route');
       $(this).blur();
    });
+   $('#collapse-route').click(function(e){
+      e.preventDefault();
+      medShow('#route-container');
+
+      largeShow('layout-show-route', true);
+   });
    $('#show-suggestions').click(function(e){
       e.preventDefault();
       medShow('#suggestions-container');
 
       largeShow('layout-show-suggestions');
       $(this).blur();
+   });
+   $('#collapse-suggestions').click(function(e){
+      e.preventDefault();
+      medShow('#suggestions-container');
+
+      largeShow('layout-show-suggestions');
    });
 
 });
@@ -111,8 +129,21 @@ function medShow(divId){
    }
 }
 
-function largeShow(className){
+function largeShow(className, clickedFromCollapse){
    let body = $('body').first();
+   if(
+      clickedFromCollapse &&
+      body.hasClass('layout-show-interests') && 
+      body.hasClass('layout-show-route')
+   ){
+      body.removeClass(className);
+      return;
+   }
+   else if(clickedFromCollapse && !body.hasClass(className)){
+      body.addClass(className);
+      return;
+   }
+
    //if this is to show suggestions
    if( className === 'layout-show-suggestions'){
       //just toggle whether suggestions is open/closed
@@ -154,7 +185,8 @@ function largeShow(className){
          if(className === 'layout-show-interests'){
             body.removeClass('layout-show-route');
             //need to set visibility on route layout-container-body to hidden
-            //after animation
+            //after animation...
+            //or make it so tabbing into route shows route
          }
          else{
             body.removeClass('layout-show-interests');

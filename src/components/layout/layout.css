@@ -82,6 +82,11 @@ body{
    font-size: 1.5rem;
    display: inline-block;
    margin: 0;
+   width: 100%;
+}
+.layout-container-header h2 a{
+   float: right;
+   visibility: hidden;
 }
 
 .layout-container-header i{
@@ -148,6 +153,18 @@ body{
       -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
       box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
    }
+   .layout-container-header h2 a{
+      visibility: visible;
+   }
+   .layout-container-header a i{
+      display: none;
+   }
+   .layout-container-header a i:nth-child(3){
+      display: inline;
+   }
+   #suggestions-container .layout-container-header a i:nth-child(2){
+      display: inline;
+   }
    .layout-container .layout-container-body{
       height: calc(100vh - 117px);
    }
@@ -205,13 +222,37 @@ body{
       transform: translateX(330px);
    }
 
-   /*interests open*/
-/*   .layout-show-interests #interests-container{
-      transform: none;
+   /*collabsable arrows*/
+   /*used nth-child(n) for specificity*/
+   .layout-container-header a i:nth-child(n){
+      display: none;
    }
-   .layout-show-interests #route-container{
-      transform: none;
-   }*/
+   #suggestions-container .layout-container-header a i:nth-child(2){
+      display: none;
+   }
+   #suggestions-container .layout-container-header a i:nth-child(1){
+      display: inline;
+   }
+   .layout-show-interests:not(.layout-show-route) #interests-container .layout-hi-hide{
+      display: inline; 
+   }
+   .layout-show-interests:not(.layout-show-route) #route-container .layout-hi-collapse{
+      display: inline; 
+   }
+   .layout-show-route:not(.layout-show-interests) #route-container .layout-hi-hide{
+      display: inline; 
+   }
+   .layout-show-route:not(.layout-show-interests) #interests-container .layout-hi-expand{
+      display: inline; 
+   }
+   .layout-show-route.layout-show-interests #interests-container .layout-hi-collapse{
+      display: inline;
+   }
+   .layout-show-route.layout-show-interests #route-container .layout-hi-expand{
+      display: inline;
+   }
+
+   /*interests open*/
    .layout-show-interests #route-container .layout-container-body{
       height: 0;
       padding-top: 0;
@@ -219,12 +260,6 @@ body{
    }
 
    /*route open*/
-  /* .layout-show-route #route-container{
-      transform: none;
-   }
-   .layout-show-route #interests-container{
-      transform: none;
-   }*/
    .layout-show-route #route-container .layout-container-body{
       padding-top: 20px;
       padding-bottom: 40px;
