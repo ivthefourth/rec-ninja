@@ -199,6 +199,9 @@ body{
       visibility: hidden;
       opacity: 0;
    }
+   .layout-container-header a{
+      display: none;
+   }
 
    #route-container{
       bottom: 0;
@@ -208,6 +211,7 @@ body{
    #route-container .layout-container-body,
    #interests-container .layout-container-body{
       height: calc(100vh - 174px);
+      visibility: hidden;
    }
    #route-container .layout-container-header{
       border-top: 1px solid #ddd;
@@ -258,12 +262,18 @@ body{
       padding-top: 0;
       padding-bottom: 0;
    }
+   .layout-interests-visible #interests-container .layout-container-body{
+      visibility: visible;
+   }
 
    /*route open*/
    .layout-show-route #route-container .layout-container-body{
       padding-top: 20px;
       padding-bottom: 40px;
       height: calc(100vh - 174px);
+   }
+   .layout-route-visible #route-container .layout-container-body{
+      visibility: visible;
    }
 
    /*route AND interests open*/
@@ -280,6 +290,10 @@ body{
       visibility: visible;
       opacity: 1;
    }
+   .layout-left-sb-visible #route-container .layout-container-header a,
+   .layout-left-sb-visible #interests-container .layout-container-header a{
+      display: inline;
+   }
    .layout-left-sb-open #route-container,
    .layout-left-sb-open #interests-container{
       transform: none;
@@ -293,6 +307,9 @@ body{
    .layout-right-sb-visible #suggestions-container{
       visibility: visible;
       opacity: 1;
+   }
+   .layout-right-sb-visible #suggestions-container .layout-container-header a{
+      display: inline;
    }
    .layout-show-suggestions #suggestions-container{
       transform: none;

@@ -129,6 +129,7 @@ function medShow(divId){
    }
 }
 
+//this should be refactored to not be so hideous and repetitive
 function largeShow(className, clickedFromCollapse){
    let body = $('body').first();
    if(
@@ -137,10 +138,28 @@ function largeShow(className, clickedFromCollapse){
       body.hasClass('layout-show-route')
    ){
       body.removeClass(className);
+      if(className === 'layout-show-route'){
+         timerIds.routeVisibility = setTimeout(() => {
+            body.removeClass('layout-route-visible');
+         }, 500);
+      }
+      else if(className === 'layout-show-interests'){
+         timerIds.interestsVisibility = setTimeout(() => {
+            body.removeClass('layout-interests-visible');
+         }, 500);
+      }
       return;
    }
    else if(clickedFromCollapse && !body.hasClass(className)){
       body.addClass(className);
+      if(className === 'layout-show-route'){
+         body.addClass('layout-route-visible');
+         clearTimeout(timerIds.routeVisibility);
+      }
+      else if(className === 'layout-show-interests'){
+         body.addClass('layout-interests-visible');
+         clearTimeout(timerIds.interestsVisibility);
+      }
       return;
    }
 
@@ -168,6 +187,16 @@ function largeShow(className, clickedFromCollapse){
          //just remove the not selected 
          body.removeClass('layout-show-interests layout-show-route');
          body.addClass(className);
+         if(className === 'layout-show-route'){
+            timerIds.routeVisibility = setTimeout(() => {
+               body.removeClass('layout-route-visible');
+            }, 500);
+         }
+         else if(className === 'layout-show-interests'){
+            timerIds.interestsVisibility = setTimeout(() => {
+               body.removeClass('layout-interests-visible');
+            }, 500);
+         }
       }
       //else if neither is open
       else if(!body.hasClass('layout-left-sb-open')){
@@ -176,22 +205,39 @@ function largeShow(className, clickedFromCollapse){
          body.removeClass('layout-show-interests layout-show-route');
          body.addClass('layout-left-sb-visible layout-left-sb-open');
          body.addClass(className);
+         if(className === 'layout-show-route'){
+            body.addClass('layout-route-visible');
+            clearTimeout(timerIds.routeVisibility);
+         }
+         else if(className === 'layout-show-interests'){
+            body.addClass('layout-interests-visible');
+            clearTimeout(timerIds.interestsVisibility);
+         }
          setTimeout(() => {body.addClass('layout-left-height-should-animate')}, 1);
       }
       //else if the selected is not open
       else if (!body.hasClass(className)){
          //close the unselected and open selected
          body.addClass(className);
+         if(className === 'layout-show-route'){
+            body.addClass('layout-route-visible');
+            clearTimeout(timerIds.routeVisibility);
+         }
+         else if(className === 'layout-show-interests'){
+            body.addClass('layout-interests-visible');
+            clearTimeout(timerIds.interestsVisibility);
+         }
          if(className === 'layout-show-interests'){
             body.removeClass('layout-show-route');
-            //need to set visibility on route layout-container-body to hidden
-            //after animation...
-            //or make it so tabbing into route shows route
+            timerIds.routeVisibility = setTimeout(() => {
+               body.removeClass('layout-route-visible');
+            }, 500);
          }
          else{
             body.removeClass('layout-show-interests');
-            //need to set visibility on interests layout-container-body to hidden
-            //after animation
+            timerIds.interestsVisibility = setTimeout(() => {
+               body.removeClass('layout-interests-visible');
+            }, 500);
          }
       }
       //else if the selected is open
@@ -203,6 +249,16 @@ function largeShow(className, clickedFromCollapse){
             body.removeClass('layout-left-sb-visible');
             body.removeClass(className);
          }, 500);
+         if(className === 'layout-show-route'){
+            timerIds.routeVisibility = setTimeout(() => {
+               body.removeClass('layout-route-visible');
+            }, 500);
+         }
+         else if(className === 'layout-show-interests'){
+            timerIds.interestsVisibility = setTimeout(() => {
+               body.removeClass('layout-interests-visible');
+            }, 500);
+         }
       }
    }
    //Note: side bar open class should allow heights to animate?
