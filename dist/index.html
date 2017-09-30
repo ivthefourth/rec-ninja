@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="utf-8">
+   <title>Rec Ninja</title>
+   <meta name="description" content="">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+   <!-- jQuery -->
+   <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+
+   <!-- materialize -->
+   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+
+   <!-- Maps API -->
+   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAEGAr0lLE7n6g1bEOC2smP7Q-F9ln8b-0&libraries=places"></script>
+</head>
+<body>
+   <nav class="blue-grey darken-4 layout-header-menu">
+      <div class="nav-wrapper">
+         <a class="brand-logo left layout-logo">Rec Ninja</a>
+         <ul class="layout-menu-options right hide-on-small-only">
+            <li><a class="btn-floating pink" title="interests" id="show-interests" href="#"><i class="material-icons">landscape</i></a></li>
+            <li><a class="btn-floating deep-orange" title="route" id="show-route" href="#"><i class="material-icons">directions_car</i></a></li>
+            <li><a class="btn-floating amber modal-trigger" title="directions" href="#directions-modal" id="show-directions" disabled tabindex="-1"><i class="material-icons" >directions</i></a></li>
+            <li><a class="btn-floating green"  title="find recreation" href="#" id="find-rec" disabled><i class="material-icons" >search</i></a></li>
+            <li><a class="btn-floating blue" title="suggestions" id="show-suggestions" href="#"><i class="material-icons">list</i></a></li>
+            <li><a class="btn-floating purple modal-trigger" href="#tutorial-modal" title="about"><i class="material-icons">help_outline</i></a></li>
+         </ul>
+         <ul class="right hide-on-med-and-up">
+            <li><a class="modal-trigger rec-navload-disabled" title="directions" href="#directions-modal" id="mobile-show-directions" disabled tabindex="-1"><i class="material-icons blue-grey-text text-darken-2">directions</i></a></li>
+            <li><a title="find recreation" id="mobile-find-rec" href="#"><i class="material-icons blue-grey-text text-darken-2">search</i></a></li>
+            <li><a href="#tutorial-modal" class="modal-trigger"><i class="material-icons" title="about">help_outline</i></a></li>
+         </ul>
+      </div>
+   </nav>
+
+
+
+   <div class="layout-container row" id="interests-container">
+      <div class="layout-container-header">
+         <h2><i class="material-icons">landscape</i> Interests <a class="grey-text" href="#" id="collapse-interests"><i class="material-icons layout-hi-expand">expand_more</i><i class="material-icons layout-hi-collapse">expand_less</i><i class="material-icons layout-hi-hide">chevron_left</i></a></h2>
+      </div>
+      <div class="layout-scroll-top"></div>
+      <div class="layout-scroll-bottom"></div>
+      <div class="col s12 layout-container-body">
+         <div id="interests">
+            <h3>Search Radius (miles)</h3>
+            <form action="#">
+               <p class="range-field">
+                  <input type="range" id="radius-slider" min="10" max="50" step="5" value="50"/>
+               </p>
+            </form>
+            <h3>Selected <a id ="clear-interests" href="#">(Clear)</a></h3>
+            <div id="selected-interests" class="interests-chips-container chips">
+               <p class="center" id="interests-none-selected">No Interests Selected</p>
+            </div>
+            <h3>Available</h3>
+            <div id="unselected-interests" class="interests-chips-container"></div>
+         </div>
+      </div>
+   </div>
+   <div class="layout-container row" id="route-container">
+      <div class="layout-container-header">
+         <h2><i class="material-icons">directions_car</i> Route <a class="grey-text" href="#" id="collapse-route"><i class="material-icons layout-hi-expand">expand_more</i><i class="material-icons layout-hi-collapse">expand_less</i><i class="material-icons layout-hi-hide">chevron_left</i></a></h2>
+      </div>
+      <div class="layout-scroll-top"></div>
+      <div class="layout-scroll-bottom"></div>
+      <div class="col s12 layout-container-body">
+         <div id="destinations"></div>
+      </div>
+   </div>
+
+   <div class="layout-container" id="suggestions-container">
+      <div class="layout-container-header">
+         <h2><i class="material-icons">list</i> Suggestions <a class="grey-text" href="#" id="collapse-suggestions"><i class="material-icons">chevron_right</i><i class="material-icons">chevron_left</i></a></h2>
+      </div>
+      <div class="layout-scroll-top"></div>
+      <div class="layout-scroll-bottom"></div>
+      <div class="col s12" id="suggestions">
+         <ul class="tabs row layout-sug-tabs">
+            <li class="tab col s6"><a class="active teal-text" href="#filtered-container">All</a></li>
+            <li class="tab col s6"><a href="#bookmarked" class=" teal-text">Bookmarked</a></li>
+            <li class="indicator teal"></li>
+         </ul>
+         <div class="row layout-suggestion-list">
+            <div>
+               <div id="filtered-container">
+                  <div id="button-container"></div>
+                  <ul id="filtered" class="collection"></ul>
+               </div>
+               <ul id="bookmarked" class="collection"></ul>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <div id="map" class="layout-shown-mobile"></div>
+
+   <div class="progress pink" id="layout-loading-areas">
+      <div class="indeterminate orange"></div>
+   </div>
+
+
+   <nav class="blue-grey darken-4 center layout-footer-menu hide-on-med-and-up">
+      <div class="nav-wrapper">
+         <ul class="layout-menu-options--footer center">
+            <li><a id="mobile-show-interests" class="btn-floating red" title="interests" href="#"><i class="material-icons">landscape</i></a></li>
+            <li><a id="mobile-show-route" class="btn-floating orange" title="route" href="#"><i class="material-icons">directions_car</i></a></li>
+            <li class="hide-on-med-and-up"><a  id="mobile-show-map" class="btn-floating green" title="map" href="#"><i class="material-icons">place</i></a></li>
+            <li><a  id="mobile-show-suggestions" class="btn-floating blue" title="suggestions" href="#"><i class="material-icons">list</i></a></li>
+         </ul>
+      </div>
+   </nav>
+
+   <!-- Modal Structure -->
+   <div id="modal1" class="modal modal-fixed-footer">
+      <button class="modal-action modal-close layout-modal-close grey-text"><i class="material-icons">close</i></button>
+      <div class="modal-content">
+         <div  id="modal1-content"></div>
+      </div>
+      <div class="modal-footer" id="rec-area-detail-modal-footer">
+         <a href="#!" id='book-mark-btn' class="modal-action modal-close waves-effect btn btn-flat">Bookmark</a>
+      </div>
+   </div>
+
+   <div id="tutorial-modal" class="modal modal-fixed-footer layout-modal-no-footer">
+      <button class="modal-action modal-close layout-modal-close grey-text"><i class="material-icons">close</i></button>
+      <div class="modal-content">
+         <h4>How it Works</h4>
+         <ol>
+            <li>Select all of your interests </li>
+            <li>Select your starting point</li>
+            <li>Select any other destinations that apply</li>
+            <li>Press the find recreation button</li>
+         </ol>
+      </div>
+   </div>
+
+   <div id="storage-modal" class="modal">
+      <div class="modal-content">
+         <h4>Continue Session?</h4>
+         <p>Welcome back! Do you want to continue your previous session or start a new one?</p>
+      </div>
+      <div class="modal-footer">
+         <a href="#!" id="new-session" class="modal-action waves-effect btn btn-flat">New Session</a><!--
+         --><a href="#!" id="continue-session" class="modal-action waves-effect btn btn-flat">Continue Session</a>
+      </div>
+   </div>
+
+   <div id="directions-modal" class="modal modal-fixed-footer layout-modal-no-footer">
+      <button class="modal-action modal-close layout-modal-close grey-text"><i class="material-icons">close</i></button>
+      <div class="modal-content">
+         <h4>Directions</h4>
+         <div id="directions-container"></div>
+      </div>
+   </div>
+<script type="text/javascript" src="app.bundle.js"></script></body>
+</html>
