@@ -106,11 +106,7 @@ export function retrieveSingleRecArea(recarea) {
 
 $(document).ready(function(){
 
-    $('#modal1').modal({
-        inDuration: 300,
-        startingTop: '40%', // Starting top style attribute
-        endingTop: '10%'
-    });
+    $('#modal1').modal();
 
     $('#book-mark-btn').click(function(){
          bookMarkItem();
@@ -122,7 +118,6 @@ $(document).ready(function(){
             href: "#!",
             text: "Add to Route",
             class: "modal-action modal-close waves-effect btn btn-flat right",
-            style: "margin: 6px",
             id: "addToRouteBtn"});
 
         $('#rec-area-detail-modal-footer').append(addToRouteButton);
