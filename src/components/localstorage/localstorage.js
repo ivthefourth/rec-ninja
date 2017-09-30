@@ -48,7 +48,8 @@ state.recreation.bookmarked.on('change', function(e){
    localStorage.setItem('has-stored', 'true');
 })
 
-function resetStorage(){
+function resetStorage(e){
+   e.preventDefault();
    hasLoaded = true;
    localStorage.setItem('has-stored', null);
    localStorage.setItem('bookmarked', null);
@@ -57,7 +58,8 @@ function resetStorage(){
    $('#storage-modal').modal('close');
 }
 
-function loadStorage(){
+function loadStorage(e){
+   e.preventDefault();
    if(hasLoaded) return;
    var interests = JSON.parse(localStorage.getItem('interests')) || {};
    state.interests.all.forEach((a) => {
@@ -134,10 +136,7 @@ window.loadStorage = loadStorage;
 
 $(document).ready(function(){
    $('#storage-modal').modal({
-      dismissible: false,
-      inDuration: 300,
-      startingTop: '40%', // Starting top style attribute
-      endingTop: '10%'
+      dismissible: false
    });
    if(hasStorage){
       $('#storage-modal').modal('open');

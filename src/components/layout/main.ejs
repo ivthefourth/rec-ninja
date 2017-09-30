@@ -119,20 +119,18 @@
 
    <!-- Modal Structure -->
    <div id="modal1" class="modal modal-fixed-footer">
-      <div>
-         <a href="#!" class="modal-action modal-close waves-effect fixed"><i class="material-icons">clear</i></a>
-      </div>
-      <div id="modal1-content" class="modal-content">
-
+      <button class="modal-action modal-close layout-modal-close grey-text"><i class="material-icons">close</i></button>
+      <div class="modal-content">
+         <div  id="modal1-content"></div>
       </div>
       <div class="modal-footer" id="rec-area-detail-modal-footer">
          <a href="#!" id='book-mark-btn' class="modal-action modal-close waves-effect btn btn-flat">Bookmark</a>
       </div>
    </div>
 
-   <div id="tutorial-modal" class="modal">
+   <div id="tutorial-modal" class="modal modal-fixed-footer layout-modal-no-footer">
+      <button class="modal-action modal-close layout-modal-close grey-text"><i class="material-icons">close</i></button>
       <div class="modal-content">
-         <a href="#!" class="modal-action modal-close waves-effect fixed"><i class="material-icons">clear</i></a>
          <h4>How it Works</h4>
          <ol>
             <li>Select all of your interests </li>
@@ -140,10 +138,6 @@
             <li>Select any other destinations that apply</li>
             <li>Press the find recreation button</li>
          </ol>
-      </div>
-      <div class="modal-footer">
-      <!-- <a href="#!" class="modal-action modal-close waves-effect btn btn-flat">Close</a> -->
-         <a href="#!" class="oops btn">Do Not Press</a>
       </div>
    </div>
 
@@ -153,14 +147,14 @@
          <p>Welcome back! Do you want to continue your previous session or start a new one?</p>
       </div>
       <div class="modal-footer">
-         <a href="#!" id="new-session" class="modal-action waves-effect waves-green btn-flat">New Session</a>
-         <a href="#!" id="continue-session" class="modal-action waves-effect waves-green btn-flat">Continue Session</a>
+         <a href="#!" id="new-session" class="modal-action waves-effect btn btn-flat">New Session</a><!--
+         --><a href="#!" id="continue-session" class="modal-action waves-effect btn btn-flat">Continue Session</a>
       </div>
    </div>
 
-   <div id="directions-modal" class="modal">
+   <div id="directions-modal" class="modal modal-fixed-footer layout-modal-no-footer">
+      <button class="modal-action modal-close layout-modal-close grey-text"><i class="material-icons">close</i></button>
       <div class="modal-content">
-         <a href="#!" class="modal-action modal-close waves-effect fixed"><i class="material-icons">clear</i></a>
          <h4>Directions</h4>
          <div id="directions-container"></div>
       </div>
