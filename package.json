@@ -10,7 +10,7 @@
     "start": "webpack-dev-server --open",
     "build": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "deploy": "git subtree push --prefix dist origin gh-pages"
+    "deploy": "git add dist; git commit -m \"build\"; git subtree push --prefix dist origin gh-pages"
   },
   "repository": {
     "type": "git",
