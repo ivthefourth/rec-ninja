@@ -1,10 +1,10 @@
 import state from '../state/state';
 
-       function telephoneCheck(strPhone){
-            // Check that the value we get is a phone number
-            var isPhone = new RegExp(/^\+?1?\s*?\(?\d{3}|\w{3}(?:\)|[-|\s])?\s*?\d{3}|\w{3}[-|\s]?\d{4}|\w{4}$/);
-            return isPhone.test(strPhone);
-        }
+    function telephoneCheck(strPhone){
+      // Check that the value we get is a phone number
+      var isPhone = new RegExp(/^\+?1?\s*?\(?\d{3}|\w{3}(?:\)|[-|\s])?\s*?\d{3}|\w{3}[-|\s]?\d{4}|\w{4}$/);
+      return isPhone.test(strPhone);
+    }
 
     function makeBookmarkButton(recarea){
         let callback = state.recreation.toggleBookmark.bind(state.recreation, recarea);
@@ -57,10 +57,7 @@ import state from '../state/state';
         let routeBtn = $('<a href="#!" title="' + title + '" class="rec-info-icon">');
         routeBtn.attr('data-id', recarea.id);
         routeBtn.append(icon);
-        routeBtn.click((e) => {
-            e.preventDefault();
-            callback();
-        });
+        routeBtn.click(callback);
         return routeBtn;
     }
 
@@ -69,7 +66,10 @@ import state from '../state/state';
         recdata.val.forEach((recarea) => {
             let container = $('<li class="suggestion-summary collection-item">');
             let info = $('<div class="rec-primary-content">')
-            info.append($('<span class="title">').text(recarea.RecAreaName));
+            let title = $('<a class="title" href="#">').text(recarea.RecAreaName);
+            title.click(recarea.showDetails);
+            title.attr('title', recarea.RecAreaName);
+            info.append(title);
             info.append($('<small class="rec-organization">').text(recarea.ORGANIZATION[0].OrgName));
             info.append($('<span class="rec-emojis">').text('emojis go here'));
             let buttons = $('<div class="secondary-content rec-buttons">');
