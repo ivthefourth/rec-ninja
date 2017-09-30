@@ -16,6 +16,7 @@
    width: 100%;
    display: inline-block;
    font-size: 1.1em;
+   color: rgba(0,0,0,0.87);
 }
 
 .suggestion-summary .rec-emojis{

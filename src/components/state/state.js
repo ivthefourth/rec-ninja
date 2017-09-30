@@ -560,8 +560,10 @@ class RecArea extends EventObject{
       this.highlightMarker = this.highlightMarker.bind(this)
       this.unHighlightMarker = this.unHighlightMarker.bind(this)
    }
-   showDetails(){
-      retrieveSingleRecArea(this);//need from elizabeth; use import and export 
+   showDetails(e){
+      if(e && e.preventDefault instanceof Function) 
+         e.preventDefault();
+      retrieveSingleRecArea(this);
    }
 
    //WARNING: should only set one event listener per RecArea
