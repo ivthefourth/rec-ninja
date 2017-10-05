@@ -1,4 +1,5 @@
 import state from '../state/state';
+import {makeEmojis} from './constants';
 
     function telephoneCheck(strPhone){
       // Check that the value we get is a phone number
@@ -71,7 +72,7 @@ import state from '../state/state';
             title.attr('title', recarea.RecAreaName);
             info.append(title);
             info.append($('<small class="rec-organization">').text(recarea.ORGANIZATION[0].OrgName));
-            info.append($('<span class="rec-emojis">').text('emojis go here'));
+            info.append(makeEmojis(state, recarea));
             let buttons = $('<div class="secondary-content rec-buttons">');
             buttons.append(makeInfoButton(recarea));
             buttons.append(makeBookmarkButton(recarea));

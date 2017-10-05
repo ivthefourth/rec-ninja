@@ -55,7 +55,7 @@ class Interest extends EventObject{
       super(['change']);
       this.name = interest.ActivityName;
       this.id = interest.ActivityID;
-      this.iconId = interest.Emoji
+      this.emojiImg = interest.Emoji
 
       this.selected = false;
 
@@ -508,26 +508,26 @@ class Map{
 const requiredProps = [
    'RecAreaName',
    'RECAREAADDRESS',
-   'FACILITY',
-   'OrgRecAreaID',
-   'GEOJSON',
-   'LastUpdatedDate',
-   'EVENT',
+   //'FACILITY',
+   //'OrgRecAreaID',
+   // 'GEOJSON',
+   // 'LastUpdatedDate',
+   // 'EVENT',
    'ORGANIZATION',
    'RecAreaEmail',
-   'RecAreaReservationURL',
+   //'RecAreaReservationURL',
    'RecAreaLongitude',
    'RecAreaID',
    'RecAreaPhone',
-   'MEDIA',
+   //'MEDIA',
    'LINK',
    'RecAreaDescription',
-   'RecAreaMapURL',
+   //'RecAreaMapURL',
    'RecAreaLatitude',
-   'StayLimit',
-   'RecAreaFeeDescription',
-   'RecAreaDirections',
-   'Keywords',
+   //'StayLimit',
+   //'RecAreaFeeDescription',
+   //'RecAreaDirections',
+   //'Keywords',
    'ACTIVITY'
 ];
 

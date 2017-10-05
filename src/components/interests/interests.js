@@ -1,13 +1,17 @@
 import './interests.css';
 import state from '../state/state';
+import {emojiMap} from '../recreation/constants';
 
     
    
  function addChip() {
    for (let i = 0; i < state.interests.all.length; i++) {
       
-      let newChip = $('<a class="chip center" href="#"></a>');
-      $("#unselected-interests").append(newChip.text(state.interests.all[i].name));
+      let newChip = $('<a class="chip" href="#"></a>');
+      $("#unselected-interests").append(
+         newChip.text(state.interests.all[i].name)
+         .prepend(emojiMap[state.interests.all[i].id])
+      );
       
       $(newChip).click(function(e) {
          e.preventDefault();
