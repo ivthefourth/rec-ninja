@@ -4,6 +4,7 @@
 import './recreation.css';
 import state from '../state/state';
 import sanitize from 'sanitize-html';
+import {makeEmojis} from './constants';
 
 var bookMarkItem;
 var unsetBookMark;
@@ -67,10 +68,7 @@ export function retrieveSingleRecArea(recarea) {
     if(recarea.ACTIVITY.length){
         var activities = $('<section class="rec-modal-activities">');
         activities.append($('<h2>').text('Activities'));
-        recarea.ACTIVITY.forEach(function(activity){
-            activities.append("<ul>");
-            activities.append("<li id='activityTypeModal'>" + activity.ActivityName);
-        })
+        activities.append(makeEmojis(state, recarea));
         modalContent.append(activities);
     }
 
