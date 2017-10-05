@@ -11,6 +11,7 @@ import {emojiMap} from '../recreation/constants';
       $("#unselected-interests").append(
          newChip.text(state.interests.all[i].name)
          .prepend(emojiMap[state.interests.all[i].id])
+         .attr('title', state.interests.all[i].name)
       );
       
       $(newChip).click(function(e) {
