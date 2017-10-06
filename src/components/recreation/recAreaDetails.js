@@ -152,7 +152,8 @@ $(document).ready(function(){
 
     $('#modal1').modal();
 
-    $('#book-mark-btn').click(function(){
+    $('#book-mark-btn').click(function(e){
+        e.preventDefault();
          bookMarkItem();
     });
 
@@ -166,7 +167,8 @@ $(document).ready(function(){
 
         $('#rec-area-detail-modal-footer').append(addToRouteButton);
 
-    $('#addToRouteBtn').click(function(){
+    $('#addToRouteBtn').click(function(e){
+        e.preventDefault();
         addRecToRoute();
     })
  
