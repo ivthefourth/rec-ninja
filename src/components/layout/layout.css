@@ -11,6 +11,10 @@
    border-color: #26a69a;
 }
 
+.modal-content{
+   -webkit-overflow-scrolling: touch;
+}
+
 .layout-header-menu .btn-floating:focus, 
 .layout-footer-menu .btn-floating:focus,
 .layout-header-menu .btn-floating:hover, 
@@ -106,6 +110,7 @@ body{
    overflow-x: hidden;
    padding-bottom: 40px;
    padding-top: 20px;
+   -webkit-overflow-scrolling: touch;
 }
 
 .layout-suggestion-list{

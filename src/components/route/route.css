@@ -35,3 +35,7 @@
 .route-btn-container{
    text-align: center;
 }
+
+#destinations input {
+   font-size: 16px;
+}
