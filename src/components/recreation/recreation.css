@@ -49,8 +49,13 @@
 
 /* Modal */
 h1.rec-modal-title{
-   font-size: 3rem;
+   font-size: 2rem;
    margin-top: 1rem;
+}
+@media all and (min-width: 601px){
+   h1.rec-modal-title{
+      font-size: 2.5rem;
+   }
 }
 
 .rec-modal-header, 
