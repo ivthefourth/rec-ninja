@@ -2,6 +2,9 @@
    border-right: none;
    border-left: none;
 }
+#filtered-container .collection:empty, #bookmarked.collection:empty{
+   border: none;
+}
 
 .suggestion-summary{
    overflow: hidden;
@@ -84,4 +87,21 @@ h1.rec-modal-title{
 .rec-address span{
    display: inline-block;
    width: 100%;
+}
+
+#button-container{
+   padding: 0 20px 10px 20px;
+   margin: 0 0 1rem 0;
+   text-align: center;
+}
+#button-container p{
+   text-align: left;
+   margin-top: 0;
+}
+#button-container p i {
+   vertical-align: middle;
+   margin: 0 0.2em;
+}
+#button-container:empty{
+   display: none;
 }

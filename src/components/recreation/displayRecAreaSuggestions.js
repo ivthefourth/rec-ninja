@@ -123,8 +123,11 @@ import {makeEmojis} from './constants';
 
        // }
 
-    if (recdata.val.length === 0){   
-         if (filteredType === "#filtered"){
+    if (recdata.val.length === 0){  
+        var status = state.recreation.status; 
+         if (filteredType === "#filtered" && 
+            !(status.shouldLoad || status.firstLoad || !status.canLoad)
+          ){
             $(filteredType).append("<li id='noneFound' class='center collection-item'>No recreation areas found.</li>");
          } else if (filteredType === "#bookmarked") {
             $(filteredType).append("<li id='no-bookmark' class='center collection-item'>Nothing bookmarked.</li>");
