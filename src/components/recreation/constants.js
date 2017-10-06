@@ -1,46 +1,82 @@
+emojione.emojiSize = 64;
+
 export var interestList = [
     {"ActivityName": "BIKING",
      "ActivityID": 5,
-     "Emoji": "🚴"
+     "Emoji": ':person_mountain_biking:'
     },
     {"ActivityName": "CLIMBING",
      "ActivityID": 7,
-     "Emoji": "A"
+     "Emoji": ':man_climbing:'
     },
     {"ActivityName": "CAMPING",
      "ActivityID": 9,
-     "Emoji": "A"
+     "Emoji": ':camping:'
      },
      {"ActivityName": "HIKING",
       "ActivityID": 14,
-      "Emoji": "A"
+      "Emoji": ':mountain:'
     },
     {"ActivityName": "PICNICKING",
       "ActivityID": 20,
-      "Emoji": "A"
+      "Emoji": ':sandwich:'
      },
-     {"ActivityName": "RECREATIONAL VEHICLES",
+     {"ActivityName": "RV",
       "ActivityID": 23,
-      "Emoji": "A"
+      "Emoji": ':minibus:'
      },
      {"ActivityName": "VISITOR CENTER",
       "ActivityID": 24,
-      "Emoji": "A"
+      "Emoji": ':information_source:'
     },
     {"ActivityName": "WATER SPORTS",
      "ActivityID": 25,
-     "Emoji": "A"
+     "Emoji": ':person_surfing:'
     },
     {"ActivityName": "WILDLIFE VIEWING",
      "ActivityID": 26,
-     "Emoji": "A"
+     "Emoji": ':eagle:'
     },
     {"ActivityName": "HORSEBACK RIDING",
      "ActivityID": 15,
-     "Emoji": "A"
-    }
-
+     "Emoji": ':horse_racing:'
+    },
+    {
+        "ActivityName": "SNORKELING",
+        "ActivityID": 108,
+        "Emoji": ':person_swimming:'
+    },
+    {
+        "ActivityName": "PHOTOGRAPHY",
+        "ActivityID": 104,
+        "Emoji": ':camera_with_flash:'
+    },
+    {
+        "ActivityName": "WINTER SPORTS",
+        "ActivityID": 22,
+        "Emoji": ':snowboarder:'
+    },
+    {
+        "ActivityName": "OFF ROADING",
+        "ActivityID": 18,
+        "Emoji": ':blue_car:'
+    },
+    {
+        "ActivityName": "HUNTING",
+        "ActivityID": 16,
+        "Emoji": ':deer:'
+    },
+    {
+        "ActivityName": "FISHING",
+        "ActivityID": 11,
+        "Emoji": ':fishing_pole_and_fish:'
+    },
 ]
+
+export const emojiMap = interestList.reduce((map, interest) => {
+    map[interest.ActivityID] = emojione.toImage(interest.Emoji);
+    return map;
+}, {});
 
 //type is 'route' or 'bookmark'
 export function updateIcons(type, id, value) {
@@ -89,4 +125,27 @@ export function recApiById(id, callback) {
             method: "GET"
         })
         .done(callback);
+}
+
+export function makeEmojis(state, recarea){
+  var container = $('<span class="rec-emojis">');
+  var filtered = state.recreation.status.filteredActivities;
+  recarea.ACTIVITY
+  .sort((a, b) => {
+    if(filtered[a.ActivityID] && !filtered[b.ActivityID]){
+      return -1;
+    }
+    else if(!filtered[a.ActivityID] && filtered[b.ActivityID]){
+      return 1;
+    }
+    else{
+      return a.ActivityName > b.ActivityName ? 1 : -1;
+    }
+  })
+  .forEach((activity) => {
+    var img = $(emojiMap[activity.ActivityID]);
+    img.attr('title', activity.ActivityName)
+    container.append(img);
+  })
+  return container;
 }

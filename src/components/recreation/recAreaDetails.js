@@ -3,66 +3,110 @@
 
 import './recreation.css';
 import state from '../state/state';
+import sanitize from 'sanitize-html';
+import {makeEmojis} from './constants';
 
 var bookMarkItem;
 var unsetBookMark;
 var addRecToRoute;
 
+function telephoneCheck(strPhone){
+  // Check that the value we get is a phone number
+    var isPhone = new RegExp(/^\+?1?\s*?\(?\d{3}|\w{3}(?:\)|[-|\s])?\s*?\d{3}|\w{3}[-|\s]?\d{4}|\w{4}$/);
+    return isPhone.test(strPhone);
+}
+
 // display the data in a modal box
 export function retrieveSingleRecArea(recarea) {
-    $('#modal1-content').empty();
-    // retrieve the data using recAreaId
+    var modalContent = $('#modal1-content');
+    modalContent.empty();
+
+    var header = $('<header class="rec-modal-header">');
+    modalContent.append(header);
 
     // The recreation Area Title
-    var recNameText = $("<div id='recNameModal'>").text(recarea.RecAreaName);
+    var recNameText = $("<h1 class='rec-modal-title'>").text(recarea.RecAreaName);
+    header.append(recNameText);
 
     //The published phone number of the area
-    var recPhoneText = $("<div id='recPhoneModal'>").text(recarea.RecAreaPhone);
-
-    var recAreaEmail = $("<div id='recEmailModal'>").text(recarea.RecAreaEmail);
-
-    // Check and see if the link array is empty or not 
-    if (recarea.LINK[0] != null) {
-        var recAreaLinkTitle = recarea.LINK[0].Title;
-        var recAreaUrl = recarea.LINK[0].URL;
-        var recAreaLink = $("<a />", {
-            href: recAreaUrl,
-            text: recAreaLinkTitle,
-            target: "_blank",
-            id: "recUrlModal"});
+    if(telephoneCheck(recarea.RecAreaPhone)){
+        var recPhoneText = $("<a class='rec-modal-phone'>")
+        .text(recarea.RecAreaPhone)
+        .attr('href', `tel:${recarea.RecAreaPhone}`);
+        header.append(recPhoneText);
     }
 
-            function telephoneCheck(strPhone){
-              // Check that the value we get is a phone number
-                var isPhone = new RegExp(/^\+?1?\s*?\(?\d{3}|\w{3}(?:\)|[-|\s])?\s*?\d{3}|\w{3}[-|\s]?\d{4}|\w{4}$/);
-                return isPhone.test(strPhone);
-            }
+    var recAreaEmail = $("<a class='rec-modal-email'>")
+    .text(recarea.RecAreaEmail)
+    .attr('href', `mailto:${recarea.RecAreaEmail}`);
+    header.append(recAreaEmail);
 
-    // Append the details of the recarea to the modal
-    // Checks whether a phone number matches a pattern before appending to the modal
-    if (telephoneCheck(recarea.RecAreaPhone) == true){    
-        $('#modal1-content').append(recNameText,recPhoneText,recAreaEmail,recAreaLink);
-    } else
-        $('#modal1-content').append(recNameText,recAreaEmail,recAreaLink);
 
     // RecAreaDescription
+    var desc = sanitize(recarea.RecAreaDescription, {
+        allowedTags: sanitize.defaults.allowedTags.concat([ 'h1', 'h2' ])
+    });
+    modalContent.append($('<section class="rec-desc-container">').html(desc));
 
-    $('#modal1-content').append(`<strong><div id='descModal'>Description:</strong> ${recarea.RecAreaDescription}`);
+    // Check and see if the link array is empty or not 
+    if(recarea.LINK.length){
+        var links = $('<section class="rec-modal-links">');
+        var linksList = $('<ul>');
+        recarea.LINK.forEach(function(link){
+            var anchor = $("<a />", {
+                href: link.URL,
+                text: link.Title,
+                target: "_blank",
+            })
+            linksList.append($('<li>').append(anchor));
+        });
+        links.append($('<h2>').text('Links'), linksList);
+        modalContent.append(links);
+    }
 
     // Append the Activities to the modal
-    $('#modal1-content').append("<strong><div id='activityModalHead' class='collection-header'>Activities</div>");
-    recarea.ACTIVITY.forEach(function(activity){
-        $('#modal1-content').append("<ul>");
-        $('#modal1-content').append("<li id='activityTypeModal'>" + activity.ActivityName);
-    })
+    if(recarea.ACTIVITY.length){
+        var activities = $('<section class="rec-modal-activities">');
+        activities.append($('<h2>').text('Activities'));
+        activities.append(makeEmojis(state, recarea));
+        modalContent.append(activities);
+    }
 
     // RECAREAADDRESS
-    recarea.RECAREAADDRESS.forEach(function(address){
-        $('#modal1-content').append("<strong><div id='addressHeadModal'>Address");
-        $('#modal1-content').append("<div class='addressModal'>" + address.RecAreaStreetAddress1);
-        $('#modal1-content').append("<div class='addressModal'>" + address.RecAreaStreetAddress2);
-        $('#modal1-content').append(`<div class='addressModal'> ${address.City}, ${address.AddressStateCode} ${address.PostalCode}`);
-    })
+    if(recarea.RECAREAADDRESS.length){
+        modalContent.append($('<h2>').text('Location'));
+
+        var addresses = $('<section class="rec-modal-addresses">');
+        recarea.RECAREAADDRESS.forEach(function(address){
+            var addressDiv = $('<div class="rec-address">');
+            var addressType = address.RecAreaAddressType ? address.RecAreaAddressType + ' ' : '';
+            addressDiv.append($("<strong>").text(`${addressType}Address:`));
+
+            if(address.RecAreaStreetAddress1){
+                addressDiv.append(
+                    $("<span class='rec-address-line'>").text(address.RecAreaStreetAddress1)
+                );
+            }
+
+            if(address.RecAreaStreetAddress2){
+                addressDiv.append(
+                    $("<span class='rec-address-line'>").text(address.RecAreaStreetAddress2)
+                );
+            }
+
+            var postalString = '';
+            postalString += address.City ? address.City + ', ' : '';
+            postalString += address.AddressStateCode? address.AddressStateCode + ' ' : '';
+            postalString += address.PostalCode || '';
+            if(postalString){
+                addressDiv.append(
+                    $('<span class="rec-address-line">').text(postalString)
+                );
+            }
+            addresses.append(addressDiv);
+        });
+        modalContent.append(addresses);
+    }
 
 
     // Set/Unset the bookmark item

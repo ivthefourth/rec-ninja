@@ -2,6 +2,9 @@
    border-right: none;
    border-left: none;
 }
+#filtered-container .collection:empty, #bookmarked.collection:empty{
+   border: none;
+}
 
 .suggestion-summary{
    overflow: hidden;
@@ -22,6 +25,9 @@
 .suggestion-summary .rec-emojis{
    width: 100%;
    display: inline-block;
+   line-height: 2.2;
+   overflow: hidden;
+   white-space: nowrap;
 }
 
 .suggestion-summary .rec-primary-content{
@@ -39,4 +45,63 @@
 .rec-navload-disabled{
    cursor: default;
    pointer-events: none;
+}
+
+/* Modal */
+h1.rec-modal-title{
+   font-size: 3rem;
+   margin-top: 1rem;
+}
+
+.rec-modal-header, 
+.rec-desc-container{
+   border-bottom: 1px dashed #9e9e9e;
+   padding-bottom: 1rem;
+   margin-bottom: 2rem;
+}
+
+.rec-modal-header a{
+   display: inline-block;
+   width: 100%;
+   margin-bottom: 0.5rem;
+}
+
+#modal1-content h2,
+.rec-desc-container h1,
+.rec-desc-container h2,
+.rec-desc-container h3,
+.rec-desc-container h4,
+.rec-desc-container h5,
+.rec-desc-container h6{
+   font-size: 1.5rem;
+}
+
+#modal1-content section:not(:last-child){
+   margin-bottom: 2rem;
+}
+
+.rec-address:not(:last-child){
+   margin-bottom: 1rem;
+}
+.rec-address strong,
+.rec-address span{
+   display: inline-block;
+   width: 100%;
+}
+
+#button-container{
+   padding: 0 20px 10px 20px;
+   margin: 0 0 1rem 0;
+   text-align: center;
+}
+#button-container p{
+   text-align: left;
+   margin-top: 0;
+}
+#button-container p i {
+   vertical-align: middle;
+   margin: 0 0.2em;
+}
+#button-container:empty{
+   display: none;
 }

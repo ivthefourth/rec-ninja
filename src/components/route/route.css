@@ -16,6 +16,7 @@
    top: 0;
 }
 .route-move-icon{
+   cursor: move;
    left: 0;
 }
 .route-close-icon{

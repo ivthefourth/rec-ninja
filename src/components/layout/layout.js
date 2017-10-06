@@ -183,12 +183,12 @@ function largeShow(className, clickedFromCollapse){
          //just remove the not selected 
          body.removeClass('layout-show-interests layout-show-route');
          body.addClass(className);
-         if(className === 'layout-show-route'){
+         if(className === 'layout-show-interests'){
             timerIds.routeVisibility = setTimeout(() => {
                body.removeClass('layout-route-visible');
             }, 500);
          }
-         else if(className === 'layout-show-interests'){
+         else if(className === 'layout-show-route'){
             timerIds.interestsVisibility = setTimeout(() => {
                body.removeClass('layout-interests-visible');
             }, 500);
