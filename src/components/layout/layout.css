@@ -3,6 +3,13 @@
    white-space: nowrap;
    text-overflow: ellipsis;
 }
+.chip img{
+   background-color: #fff;
+   border: 2px solid #e4e4e4;
+}
+.chip.selected img{
+   border-color: #26a69a;
+}
 
 .layout-header-menu .btn-floating:focus, 
 .layout-footer-menu .btn-floating:focus,
@@ -339,6 +346,16 @@ body{
 }
 .layout-modal-no-footer.modal-fixed-footer .modal-content{
    height: auto;
+}
+#tutorial-modal h4{
+   margin-top: 1rem;
+}
+#tutorial-modal i{
+   vertical-align: middle;
+}
+#tutorial-modal ol{
+   list-style: none;
+   padding-left: 1rem;
 }
 @media screen and (max-width: 600px){
    #storage-modal .btn-flat, #modal1 .btn-flat{
