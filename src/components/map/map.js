@@ -70,7 +70,6 @@ state.route.on('change', function(e){
       if(state.route.waypoints)
          request.waypoints = state.route.waypoints;
       directionsService.route(request, function(result, status) {
-         console.log(result);
          if (status == 'OK') {
             if(result.geocoded_waypoints.length === state.route.locationCount){
                state.map.directions.update(result.routes[0]);
