@@ -70,11 +70,23 @@ state.route.on('change', function(e){
       if(state.route.waypoints)
          request.waypoints = state.route.waypoints;
       directionsService.route(request, function(result, status) {
+         console.log(result);
          if (status == 'OK') {
-            state.map.directions.update(result.routes[0]);
-            directionsDisplay.setDirections(result);
+            if(result.geocoded_waypoints.length === state.route.locationCount){
+               state.map.directions.update(result.routes[0]);
+               directionsDisplay.setDirections(result);
+            }
          }
-         //else show some error toast?
+         else if (status === 'ZERO_RESULTS') {
+            Materialize.toast(
+               'Can not generate directions for given locations.'
+            , 4000);
+         }
+         else {
+            Materialize.toast(
+               'Something went wrong.'
+            , 4000);
+         }
       });
    }
    else{
