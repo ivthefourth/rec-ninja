@@ -71,7 +71,7 @@ import {makeEmojis} from './constants';
             title.click(recarea.showDetails);
             title.attr('title', recarea.RecAreaName);
             info.append(title);
-            info.append($('<small class="rec-organization">').text(recarea.ORGANIZATION[0].OrgName));
+            info.append($('<small class="rec-organization">').text((recarea.ORGANIZATION[0] || {OrgName: '- -'}).OrgName));
             info.append(makeEmojis(state, recarea));
             let buttons = $('<div class="secondary-content rec-buttons">');
             buttons.append(makeInfoButton(recarea));
