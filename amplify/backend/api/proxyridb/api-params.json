@@ -1,0 +1,34 @@
+{
+    "paths": [
+        {
+            "name": "/recareas",
+            "lambdaFunction": "proxyridb",
+            "privacy": {
+                "open": true
+            }
+        }
+    ],
+    "resourceName": "proxyridb",
+    "apiName": "proxyridb",
+    "functionArns": [
+        {
+            "lambdaFunction": "proxyridb"
+        }
+    ],
+    "privacy": {
+        "auth": 0,
+        "unauth": 0,
+        "authRoleName": "rec-ninja-devtest-20190706150614-authRole",
+        "unAuthRoleName": "rec-ninja-devtest-20190706150614-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "proxyridb",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ]
+}

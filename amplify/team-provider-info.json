@@ -1,0 +1,14 @@
+{
+    "devtest": {
+        "awscloudformation": {
+            "AuthRoleName": "rec-ninja-devtest-20190706150614-authRole",
+            "UnauthRoleArn": "arn:aws:iam::196766528051:role/rec-ninja-devtest-20190706150614-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::196766528051:role/rec-ninja-devtest-20190706150614-authRole",
+            "Region": "us-west-2",
+            "DeploymentBucketName": "rec-ninja-devtest-20190706150614-deployment",
+            "UnauthRoleName": "rec-ninja-devtest-20190706150614-unauthRole",
+            "StackName": "rec-ninja-devtest-20190706150614",
+            "StackId": "arn:aws:cloudformation:us-west-2:196766528051:stack/rec-ninja-devtest-20190706150614/e3c83020-a031-11e9-a0c4-06737af08cb6"
+        }
+    }
+}
