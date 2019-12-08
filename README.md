@@ -1,6 +1,6 @@
 # Rec Ninja
 
-[Live Link](https://ivthefourth.github.io/rec-ninja/)
+[Live Link](https://rec-ninja.howardcshaw.com/)
 
 [![Waffle.io - Issues in progress](https://badge.waffle.io/ivthefourth/rec-ninja.svg?label=in%20progress&title=In%20Progress)](http://waffle.io/ivthefourth/rec-ninja)
 
